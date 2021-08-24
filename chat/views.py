@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from . import models
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from . import models, forms
 
 
 
@@ -12,21 +13,24 @@ def index(request):
     return render(request, 'chat/index.html', context)
 
 
+def register(request):
+    pass
+
+
 def login_user(request):
-    context = {}
+    context = {'form': forms.LoginForm()}
 
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        form = forms.LoginForm(data=request.POST)
+        if form.is_valid():
+            authenticated_user = form.user_cache
 
-        user = authenticate(request, username=username, password=password)
+            if not authenticated_user:
+                messages.error(request, 'Invalid credentials.')
+                return redirect(reverse('login', ))
 
-        if not user:
-            messages.error(request, 'Invalid credentials.')
-            return redirect(reverse('login', ))
-
-        login(request, user)
-        return redirect(reverse('index', ))
+            login(request, authenticated_user)
+            return redirect(reverse('index', ))
 
 
     return render(request, 'chat/login.html', context)
