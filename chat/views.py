@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from . import models, forms
 
 
@@ -14,25 +14,30 @@ def index(request):
 
 
 def register(request):
-    pass
+    form = forms.RegisterForm()
+
+    if request.method == 'POST':
+        form = forms.RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'User \'{username}\' has been registered. You can now log in.')
+            return redirect(reverse('login', ))
+
+    context = {'form': form}
+    return render(request, 'chat/register.html', context)
 
 
 def login_user(request):
-    context = {'form': forms.LoginForm()}
+    form = forms.LoginForm()
 
     if request.method == 'POST':
         form = forms.LoginForm(data=request.POST)
         if form.is_valid():
-            authenticated_user = form.user_cache
-
-            if not authenticated_user:
-                messages.error(request, 'Invalid credentials.')
-                return redirect(reverse('login', ))
-
-            login(request, authenticated_user)
+            login(request, form.user_cache)
             return redirect(reverse('index', ))
-
-
+        
+    context = {'form': form}
     return render(request, 'chat/login.html', context)
 
 
