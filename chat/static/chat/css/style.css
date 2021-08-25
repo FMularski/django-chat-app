@@ -10,8 +10,52 @@
   transition: all 0.3s ease;
 }
 
-.hover-scale:hover {
+.hover-scale:hover, .hover-scale:focus {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+a#back-btn {
+  color: white;
+  position: absolute;
+  bottom: 4rem;
+  left: 4rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+a#back-btn i {
+  -webkit-animation: back-btn 1s infinite linear;
+          animation: back-btn 1s infinite linear;
+}
+
+@-webkit-keyframes back-btn {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes back-btn {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
 }
 /*# sourceMappingURL=style.css.map */

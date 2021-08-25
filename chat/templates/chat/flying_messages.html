@@ -1,0 +1,58 @@
+<style>
+    .flying-msg {
+        position: absolute;
+        height: 12vh;
+        cursor: pointer;
+        pointer-events: all;
+        transition: all 1s ease;
+        z-index: -1;
+    
+    }
+
+    .msg-top {
+        top: 20vh;
+        animation: flying-msg 3s ease-in-out alternate infinite;
+        }
+    
+    .msg-mid {
+        top: 50vh;
+        animation: flying-msg 5s alternate-reverse infinite;
+    }
+    
+    .msg-bot {
+        top: 80vh;
+        animation: flying-msg 4s ease-out alternate infinite;
+    }
+
+    @keyframes flying-msg {
+        from {
+            transform: translateX(-20rem);
+        }
+        to {
+            transform: translateX(105vw);
+        }   
+    }
+</style>
+
+{% load static %}
+
+<img class="flying-msg msg-top" src="{% static '/chat/img/message.png' %}" alt="">
+<img class="flying-msg msg-mid" src="{% static '/chat/img/message.png' %}" alt="">
+<img class="flying-msg msg-bot" src="{% static '/chat/img/message.png' %}" alt="">
+
+<script defer>
+    const messages = document.querySelectorAll('.flying-msg');
+    messages.forEach(function(msg){
+        setInterval(function() {
+            const x = msg.getBoundingClientRect().x;
+            if (x < -150 || x > screen.width) {
+                change(msg);
+            }
+        }, 1);
+    });
+
+    function change(msg) {
+        msg.style.top = (Math.random() * 100) % 80 + 'vh';
+        msg.style.height  = (Math.random() * 100) % 15 + 4 + 'vh';
+    }
+</script>

@@ -17,6 +17,7 @@
     <title>Chat App{% block title %}{% endblock %}</title>
   </head>
   <body>
+    {% include 'chat/flying_messages.html' %}
 
     {% if messages %}
         <div class="popup success">
@@ -46,27 +47,6 @@
     <a href="https://github.com/FMularski/django-chat-app" id="github-link" class="hover-scale" target="_blank">
         <i class="fab fa-github-square"></i>
     </a>
-
-    <img class="flying-msg msg-top" src="{% static '/chat/img/message.png' %}" alt="">
-    <img class="flying-msg msg-mid" src="{% static '/chat/img/message.png' %}" alt="">
-    <img class="flying-msg msg-bot" src="{% static '/chat/img/message.png' %}" alt="">
-
-    <script>
-        const messages = document.querySelectorAll('.flying-msg');
-        messages.forEach(function(msg){
-            setInterval(function() {
-                const x = msg.getBoundingClientRect().x;
-                if (x < -150 || x > screen.width) {
-                    change(msg);
-                }
-            }, 1);
-        });
-
-        function change(msg) {
-            msg.style.top = (Math.random() * 100) % 80 + 'vh';
-            msg.style.height  = (Math.random() * 100) % 15 + 4 + 'vh';
-        }
-    </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>

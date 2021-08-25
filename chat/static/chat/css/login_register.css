@@ -86,20 +86,6 @@ main form div#form-links {
           align-items: center;
 }
 
-a#back-btn {
-  color: white;
-  position: absolute;
-  bottom: 4rem;
-  left: 4rem;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-a#back-btn i {
-  -webkit-animation: back-btn 1s infinite linear;
-          animation: back-btn 1s infinite linear;
-}
-
 div.popup {
   padding: 0.5rem 2rem 0.5rem 2rem;
   width: 30rem;
@@ -121,33 +107,6 @@ div.popup.errors {
 
 div.popup.success {
   background: rgba(0, 255, 21, 0.55);
-}
-
-.flying-msg {
-  position: absolute;
-  height: 12vh;
-  cursor: pointer;
-  pointer-events: all;
-  -webkit-transition: all 1s ease;
-  transition: all 1s ease;
-  z-index: -1;
-}
-
-.flying-msg.msg-top {
-  top: 20vh;
-  -webkit-animation: flying-msg 3s ease-in-out alternate infinite;
-          animation: flying-msg 3s ease-in-out alternate infinite;
-}
-
-.flying-msg.msg-mid {
-  top: 50vh;
-  animation: flying-msg 5s alternate-reverse infinite;
-}
-
-.flying-msg.msg-bot {
-  top: 80vh;
-  -webkit-animation: flying-msg 4s ease-out alternate infinite;
-          animation: flying-msg 4s ease-out alternate infinite;
 }
 
 a#github-link {
@@ -224,36 +183,6 @@ a#github-link i {
   }
 }
 
-@-webkit-keyframes back-btn {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  50% {
-    -webkit-transform: translateX(-10px);
-            transform: translateX(-10px);
-  }
-  100% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-}
-
-@keyframes back-btn {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  50% {
-    -webkit-transform: translateX(-10px);
-            transform: translateX(-10px);
-  }
-  100% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-}
-
 @-webkit-keyframes fade-in {
   from {
     opacity: 0;
@@ -287,28 +216,6 @@ a#github-link i {
   }
   to {
     margin-left: 20rem;
-  }
-}
-
-@-webkit-keyframes flying-msg {
-  from {
-    -webkit-transform: translateX(-20rem);
-            transform: translateX(-20rem);
-  }
-  to {
-    -webkit-transform: translateX(105vw);
-            transform: translateX(105vw);
-  }
-}
-
-@keyframes flying-msg {
-  from {
-    -webkit-transform: translateX(-20rem);
-            transform: translateX(-20rem);
-  }
-  to {
-    -webkit-transform: translateX(105vw);
-            transform: translateX(105vw);
   }
 }
 
