@@ -1,0 +1,26 @@
+{% load static %}
+
+<style>
+    svg#transition-in {
+        animation: shrink 1s ease;
+
+        transform-origin: center;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translateX(50%) translateY(-50%) scale(0);
+    }
+
+    @keyframes shrink {
+        from {
+            transform: translateX(50%) translateY(-50%) scale(55);
+        } to {
+            transform: translateX(50%) translateY(-50%) scale(0);
+        }
+    }
+</style>
+
+<svg id="transition-in" height="100" width="100">
+    <circle cx="50" cy="50" r="40" fill="white" />
+</svg>
+

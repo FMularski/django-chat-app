@@ -9,7 +9,7 @@
 {% block title2 %} | Log In {% endblock %}
 
 {% block main %}
-    <form action="" method="POST">
+    <form action="" method="POST" class="transition-activator">
         {% csrf_token %}
 
         <label>{{form.username.label}}</label>
@@ -26,6 +26,7 @@
         </div>
     </form>
 
+    {% include 'chat/transition-out.html' %}
 {% endblock %}
 
 {% block script %}{% endblock %}

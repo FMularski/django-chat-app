@@ -1,0 +1,39 @@
+{% load static %}
+
+<style>
+    svg#transition-out {
+        /* animation: expand 1s ease; */
+
+        transform-origin: center;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-50%) translateY(50%) scale(0);
+    }
+
+    @keyframes expand {
+        from {
+            transform: translateX(-50%) translateY(50%) scale(0);
+        } to {
+            transform: translateX(-50%) translateY(50%) scale(55);
+        }
+    }
+</style>
+
+<svg id="transition-out" height="100" width="100">
+    <circle cx="50" cy="50" r="40" fill="white" />
+</svg>
+
+<script>
+    (function(){
+        const transitionActivator = document.querySelector('.transition-activator');
+        const transition = document.querySelector('#transition-out');
+
+        transitionActivator.addEventListener('submit', function(){
+            transition.style.animation = 'expand 1s ease';
+            transition.addEventListener('animationend', function(){
+                transition.style.transform = 'translateX(-50%) translateY(50%) scale(55)';
+            })
+        })
+    })();
+</script>
