@@ -11,23 +11,6 @@
 {% block main %}
     <form action="" method="POST">
         {% csrf_token %}
-        
-
-        <div id="errors">
-
-            <b style="color: red;">{{form.errors}}</b>
-
-            {% for field in form %}
-                {% if field.errors %}
-                    <b style="color: red;">[{{field.label}}]</b>
-                    <ul style="color: red;">
-                        {% for error in field.errors %}
-                            <li>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endfor %}
-        </div>
 
         <label>{{form.username.label}}</label>
         {{form.username}}

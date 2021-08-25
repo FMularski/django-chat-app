@@ -70,6 +70,61 @@ main {
     }
 }
 
+div#errors {
+    background: rgba(255, 0, 0, 0.4);
+    color: white;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    width: 30rem;
+    transition: all 0.3s ease;
+
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    box-shadow: rgba(0, 0, 0, 0.5) .75rem .75rem; 
+    animation: error-dingle 0.3s ease;
+
+}
+
+.flying-msg {
+    position: absolute;
+    height: 12vh;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all 1s ease;
+    z-index: -1;
+  
+    &.msg-top {
+      top: 20vh;
+      animation: flying-msg 3s ease-in-out alternate infinite;
+    }
+  
+    &.msg-mid {
+      top: 50vh;
+      animation: flying-msg 5s alternate-reverse infinite;
+    }
+  
+    &.msg-bot {
+      top: 80vh;
+      animation: flying-msg 4s ease-out alternate infinite;
+    }
+  }
+  
+  
+a#github-link {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    color: white;
+    text-decoration: none;
+    
+    i {
+        font-size: 3rem;
+    }
+}
+
+// KEYFRAMES
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -113,30 +168,7 @@ main {
     }
 }
 
-.flying-msg {
-    position: absolute;
-    height: 12vh;
-    cursor: pointer;
-    pointer-events: all;
-    transition: all 1s ease;
-    z-index: -1;
-  
-    &.msg-top {
-      top: 20vh;
-      animation: flying-msg 3s ease-in-out alternate infinite;
-    }
-  
-    &.msg-mid {
-      top: 50vh;
-      animation: flying-msg 5s alternate-reverse infinite;
-    }
-  
-    &.msg-bot {
-      top: 80vh;
-      animation: flying-msg 4s ease-out alternate infinite;
-    }
-  }
-  
+
 @keyframes flying-msg {
     from {
         transform: translateX(-20rem);
@@ -145,6 +177,24 @@ main {
         transform: translateX(105vw);
     }
 }
+
+@keyframes error-dingle {
+    0% {
+        transform: translateY(15px);
+    }
+    33% {
+        transform: translateY(0px);
+    }
+    66% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+    
+}
+
+// MEDIA
 
 @media screen and (max-width: 1200px) {
     html {
@@ -156,16 +206,4 @@ main {
     html {
         font-size: 60%;
     }   
-}
-
-a#github-link {
-    position: absolute;
-    bottom: 4rem;
-    right: 4rem;
-    color: white;
-    text-decoration: none;
-    
-    i {
-        font-size: 3rem;
-    }
 }

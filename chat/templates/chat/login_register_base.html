@@ -17,6 +17,11 @@
     <title>Chat App{% block title %}{% endblock %}</title>
   </head>
   <body>
+    <div id="errors">
+        <h4><i class="fas fa-exclamation-triangle"></i> Error occured</h4>
+        <b>{{form.errors}}</b>
+    </div>
+
     <header>
         <img src="{% static '/chat/img/message.png' %}" alt="">
         <span>Chat App</span><span id="title2">{% block title2 %}{% endblock %}</span>
