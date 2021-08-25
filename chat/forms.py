@@ -4,8 +4,8 @@ from django import forms
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField( widget=forms.TextInput(attrs={'placeholder': 'insert username...'}))
-    password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder': 'insert password...'}))
+    username = forms.CharField( widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField( widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     error_messages = {
         'invalid_login': 

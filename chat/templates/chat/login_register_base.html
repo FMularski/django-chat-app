@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block meta %}{% endblock %}
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static '/chat/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/chat/css/login_register.css' %}">
+    {% block link %}{% endblock %}
+
+    <title>Chat App{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+        <img src="{% static '/chat/img/message.png' %}" alt="">
+        <span>Chat App</span><span id="title2">{% block title2 %}{% endblock %}</span>
+    </header>
+
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+
+    <a href="https://github.com/FMularski/django-chat-app" id="github-link" class="hover-scale" target="_blank">
+        <i class="fab fa-github-square"></i>
+    </a>
+
+    <img class="flying-msg msg-top" src="{% static '/chat/img/message.png' %}" alt="">
+    <img class="flying-msg msg-mid" src="{% static '/chat/img/message.png' %}" alt="">
+    <img class="flying-msg msg-bot" src="{% static '/chat/img/message.png' %}" alt="">
+
+    <script>
+        const messages = document.querySelectorAll('.flying-msg');
+        messages.forEach(function(msg){
+            setInterval(function() {
+                const x = msg.getBoundingClientRect().x;
+                if (x < -150 || x > screen.width) {
+                    change(msg);
+                }
+            }, 1);
+        });
+
+        function change(msg) {
+            msg.style.top = (Math.random() * 100) % 80 + 'vh';
+            msg.style.height  = (Math.random() * 100) % 15 + 4 + 'vh';
+        }
+    </script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    {% block script %}{% endblock %}
+  </body>
+</html>
