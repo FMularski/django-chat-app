@@ -70,20 +70,37 @@ main {
     }
 }
 
-div#errors {
-    background: rgba(255, 0, 0, 0.4);
+a#back-btn {
     color: white;
+    position: absolute;
+    bottom: 4rem;
+    left: 4rem;
+    text-decoration: none; 
+    font-size: 1.2rem;
+
+    i {
+        animation: back-btn 1s infinite linear;
+    }
+}
+
+div.popup {
     padding: 0.5rem 2rem 0.5rem 2rem;
     width: 30rem;
     transition: all 0.3s ease;
-
+    color: white;
     position: absolute;
     top: 1rem;
     right: 1rem;
-
     box-shadow: rgba(0, 0, 0, 0.5) .75rem .75rem; 
     animation: error-dingle 0.3s ease;
-
+    
+    &.errors {
+        background: rgba(255, 0, 0, 0.4);
+    }
+    
+    &.success {
+        background: rgba(0, 255, 21, 0.55);
+    }
 }
 
 .flying-msg {
@@ -149,6 +166,18 @@ a#github-link {
     }
     100%{
         transform: rotateX(360deg) rotateY(360deg) rotateZ(45deg);
+    }
+}
+
+@keyframes back-btn {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
     }
 }
 

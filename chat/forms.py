@@ -19,17 +19,20 @@ class LoginForm(AuthenticationForm):
 class RegisterForm(UserCreationForm):
     password1 = forms.CharField(
         label='Password',
-        widget=forms.PasswordInput(attrs={'placeholder': 'enter password 1'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
     password2 = forms.CharField(
         label='Confirm password',
-        widget=forms.PasswordInput(attrs={'placeholder': 'enter password 2'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
 
     class Meta:
         model = get_user_model()
         fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email')
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'enter username...'})
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'})
         }
 

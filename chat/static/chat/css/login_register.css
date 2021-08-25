@@ -86,13 +86,26 @@ main form div#form-links {
           align-items: center;
 }
 
-div#errors {
-  background: rgba(255, 0, 0, 0.4);
+a#back-btn {
   color: white;
+  position: absolute;
+  bottom: 4rem;
+  left: 4rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+a#back-btn i {
+  -webkit-animation: back-btn 1s infinite linear;
+          animation: back-btn 1s infinite linear;
+}
+
+div.popup {
   padding: 0.5rem 2rem 0.5rem 2rem;
   width: 30rem;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  color: white;
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -100,6 +113,14 @@ div#errors {
           box-shadow: rgba(0, 0, 0, 0.5) 0.75rem 0.75rem;
   -webkit-animation: error-dingle 0.3s ease;
           animation: error-dingle 0.3s ease;
+}
+
+div.popup.errors {
+  background: rgba(255, 0, 0, 0.4);
+}
+
+div.popup.success {
+  background: rgba(0, 255, 21, 0.55);
 }
 
 .flying-msg {
@@ -200,6 +221,36 @@ a#github-link i {
   100% {
     -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(45deg);
             transform: rotateX(360deg) rotateY(360deg) rotateZ(45deg);
+  }
+}
+
+@-webkit-keyframes back-btn {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes back-btn {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
 }
 

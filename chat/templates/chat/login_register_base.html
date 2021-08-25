@@ -17,10 +17,22 @@
     <title>Chat App{% block title %}{% endblock %}</title>
   </head>
   <body>
-    <div id="errors">
-        <h4><i class="fas fa-exclamation-triangle"></i> Error occured</h4>
-        <b>{{form.errors}}</b>
-    </div>
+
+    {% if messages %}
+        <div class="popup success">
+            <h4><i class="fas fa-check-circle"></i> Success</h4>
+            {% for message in messages %}
+                <b>{{message}}</b>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    {% if form.errors %}
+        <div class="popup errors">
+            <h4><i class="fas fa-exclamation-triangle"></i> Error occured</h4>
+            <b>{{form.errors}}</b>
+        </div>
+    {% endif %}
 
     <header>
         <img src="{% static '/chat/img/message.png' %}" alt="">
