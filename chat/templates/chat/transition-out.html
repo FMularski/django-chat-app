@@ -26,14 +26,22 @@
 
 <script>
     (function(){
-        const transitionActivator = document.querySelector('.transition-activator');
+        const transitionActivators = document.querySelectorAll('.transition-activator');
         const transition = document.querySelector('#transition-out');
 
-        transitionActivator.addEventListener('submit', function(){
-            transition.style.animation = 'expand 1s ease';
-            transition.addEventListener('animationend', function(){
-                transition.style.transform = 'translateX(-50%) translateY(50%) scale(55)';
+        const addTransitionEvent = function(activator, eventName) {
+            activator.addEventListener(eventName, function() {
+                transition.style.animation = 'expand 1s ease';
+                transition.addEventListener('animationend', function(){
+                    transition.style.transform = 'translateX(-50%) translateY(50%) scale(55)';
+                })
             })
+        } 
+
+        transitionActivators.forEach( function(activator) {
+            if (activator.tagName == 'FORM') addTransitionEvent(activator, 'submit');
+            else if (activator.tagName == 'A') addTransitionEvent(activator, 'click');
         })
+
     })();
 </script>

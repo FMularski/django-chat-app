@@ -10,7 +10,7 @@
 
 {% block main %}
     
-    <form action="" method="POST">
+    <form action="" method="POST" class="transition-activator">
         {% csrf_token %}
 
         <label>{{form.username.label}}</label>
@@ -29,8 +29,7 @@
         
         <input type="submit" value="Submit" class="btn btn-outline-light">
     </form>
-    <a href="{% url 'login' %}" class="" id="back-btn"><i class="fas fa-arrow-left"></i> Already have an account?</a>
-    
+    <a href="{% url 'login' %}" class="transition-activator" id="back-btn"><i class="fas fa-arrow-left"></i> Already have an account?</a>
 {% endblock %}
 
 {% block script %}{% endblock %}

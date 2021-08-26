@@ -12,6 +12,12 @@
     }
 }
 
+.flex-evenly {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 a#back-btn {
     color: white;
     position: absolute;
@@ -36,3 +42,4 @@ a#back-btn {
         transform: translateX(0);
     }
 }
+
