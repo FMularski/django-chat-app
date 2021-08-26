@@ -1,6 +1,79 @@
 {% extends 'chat/base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static '/chat/css/index.css' %}">
+{% endblock %}
+
+
 
 {% block main %}
+    <main>
+        <table>
+            <tr>
+                <td>
+                    <form action="#">
+                        <button type="submit" class="menu-option">
+                            <div class="circle">
+                                Option 1
+                            </div>
+                        </button>
+                    </form>
+                </td>
+                <td></td>
+                <td><form action="#">
+                    <button type="submit" class="menu-option">
+                        <div class="circle">
+                            Option 2
+                        </div>
+                    </button>
+                </form></td>
+                <td></td>
+                <td><form action="#">
+                    <button type="submit" class="menu-option">
+                        <div class="circle">
+                            Option 3
+                        </div>
+                    </button>
+                </form></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><form action="#">
+                    <button type="submit" class="menu-option">
+                        <div class="circle">
+                            Option 4
+                        </div>
+                    </button>
+                </form></td>
+                <td></td>
+                <td><form action="{% url 'logout' %}">
+                    <button type="submit" class="menu-option">
+                        <div class="circle">
+                            Log out
+                        </div>
+                    </button>
+                </form></td>
+                <td></td>
+            </tr>
+        </table>
+    </main>
+    
 
     {% include 'chat/transition-in.html' %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        (function() {
+            const menuOptions = document.querySelectorAll('.circle');
+            menuOptions.forEach(function(opt) {
+                opt.addEventListener('click', function (){
+                    opt.innerText = '';
+                    opt.style.transition = 'all 1s ease';
+                    opt.style.transform = 'scale(55)';
+                })
+            })
+        })();
+    </script>
 {% endblock %}
