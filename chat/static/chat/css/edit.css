@@ -24,6 +24,7 @@ form div#edit-form-left {
 }
 
 form div#edit-form-right {
+  font-size: 0;
   margin-left: 3rem;
 }
 
@@ -31,6 +32,16 @@ form div#edit-form-right img {
   width: 12rem;
   border: 3px solid white;
   border-radius: 50%;
+  display: inline;
+  float: left;
+}
+
+form div#edit-form-right a {
+  display: none;
+}
+
+form div#edit-form-right * {
+  font-size: initial;
 }
 
 form input::-webkit-file-upload-button {

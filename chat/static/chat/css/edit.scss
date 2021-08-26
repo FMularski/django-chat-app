@@ -19,12 +19,23 @@ form {
     }
 
     div#edit-form-right {
+        font-size: 0;
         margin-left: 3rem;
         img {
             width: 12rem;
             border: 3px solid white;
             border-radius: 50%;
+            display: inline;
+            float: left;
         }
+
+        a {
+            display: none;
+        }
+    }
+
+    div#edit-form-right * {
+        font-size: initial;
     }
 
     input::-webkit-file-upload-button {
