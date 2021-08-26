@@ -5,9 +5,16 @@
     <link rel="stylesheet" href="{% static '/chat/css/index.css' %}">
 {% endblock %}
 
-
-
 {% block main %}
+    <div id="user_img_and_name" class="flex-evenly">
+        {% if user.profile.profile_img %}
+            <img src="{{user.profile.profile_img}}" alt="profile img">  
+        {% else %}
+            <img src="{% static '/chat/img/default_profile.png' %}" alt="profile img">
+        {% endif %}
+        <span>{{user.username}}</span>
+    </div>
+
     <main>
         <table>
             <tr>

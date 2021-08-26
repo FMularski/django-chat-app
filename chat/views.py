@@ -10,6 +10,7 @@ from . import models, forms
 @login_required(login_url='login')
 def index(request):
     context = {}
+    print(request.user.profile)
     return render(request, 'chat/index.html', context)
 
 

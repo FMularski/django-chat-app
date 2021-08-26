@@ -9,6 +9,24 @@ body {
     overflow-x: hidden;
 }
 
+div#user_img_and_name {
+
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+
+    img {
+        width: 4rem;
+        border-radius: 50%;
+        border: 3px solid white;
+    }
+    span {
+        font-family: 'Roboto', sans-serif;
+        color: white;
+        margin-left: 1rem;
+        font-size: 2rem;
+    }
+}
 
 main {
     width: 100%;
