@@ -10,7 +10,6 @@ from . import models, forms
 @login_required(login_url='login')
 def index(request):
     context = {}
-    print(request.user.profile)
     return render(request, 'chat/index.html', context)
 
 
@@ -45,5 +44,12 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect(reverse('login', ))
+
+
+@login_required(login_url='login')
+def edit(request):
+    form = forms.UserProfileForm(instance=request.user.profile)
+    context = {'form': form}
+    return render(request, 'chat/edit.html', context)
 
 

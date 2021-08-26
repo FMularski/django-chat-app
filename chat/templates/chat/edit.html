@@ -1,0 +1,61 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static '/chat/css/edit.css' %}">
+{% endblock %}
+{% block title %} | Edit profile {% endblock %}
+
+{% block header %}
+    <header>
+        <h1>Edit user profile</h1>
+    </header>
+{% endblock %}
+
+{% block main %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div id="edit-form-left">
+            <label>{{form.username.label}}</label>
+            {{form.username}}
+            <label>{{form.first_name.label}}</label>
+            {{form.first_name}}
+            <label>{{form.last_name.label}}</label>
+            {{form.last_name}}
+            <label>{{form.email.label}}</label>
+            {{form.email}}
+            <br>
+            <input type="submit" value="Save changes" class="hover-scale btn btn-outline-light">
+        </div>
+        <div id="edit-form-right">
+            {% if user.profile.profile_img %}
+                <img src="{{user.profile.profile_img}}" class="profile_img_form">
+            {% else %}
+                <img src="{% static '/chat/img/default_profile.png' %}" class="profile_img_form">
+            {% endif %}
+
+            {{form.profile_img}}
+        </div>
+
+    </form>
+
+    <img id="pencil" src="{% static '/chat/img/white-pencil.png' %}">
+    <div id="pencil-page">
+        <p>User Profile</p>
+    </div>
+
+    {% include 'chat/transition-in.html' %}
+    {% include 'chat/transition-out.html' %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        (function(){
+            const pencil = document.querySelector('#pencil');
+            
+            pencil.addEventListener('animationend', function() {
+                pencil.style.animation = 'writing 2s ease infinite';
+            })
+        })();
+    </script>
+{% endblock %}

@@ -19,48 +19,44 @@
         <table>
             <tr>
                 <td>
-                    <form action="#">
-                        <button type="submit" class="menu-option">
-                            <div class="circle">
-                                Option 1
-                            </div>
-                        </button>
-                    </form>
+                    <a href="#" class="menu-option">
+                        <div class="circle">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                    </a>
                 </td>
                 <td></td>
-                <td><form action="#">
-                    <button type="submit" class="menu-option">
+                <td>
+                    <a href="#" class="menu-option">
                         <div class="circle">
-                            Option 2
+                            <i class="fas fa-user-friends"></i>
                         </div>
-                    </button>
-                </form></td>
+                    </a>
+                </td>
                 <td></td>
-                <td><form action="#">
-                    <button type="submit" class="menu-option">
+                <td>
+                    <a href="{% url 'edit' %}" class="menu-option">
                         <div class="circle">
-                            Option 3
+                            <i class="fas fa-user-edit"></i>
                         </div>
-                    </button>
-                </form></td>
+                    </a>
+                </td>
             </tr>
             <tr>
                 <td></td>
-                <td><form action="#">
-                    <button type="submit" class="menu-option">
+                <td>
+                    <a href="#" class="menu-option">
                         <div class="circle">
-                            Option 4
+                            <i class="fab fa-apple-pay"></i>
                         </div>
-                    </button>
-                </form></td>
+                    </a>
+                </td>
                 <td></td>
-                <td><form action="{% url 'logout' %}">
-                    <button type="submit" class="menu-option">
-                        <div class="circle">
-                            Log out
-                        </div>
-                    </button>
-                </form></td>
+                <td><a href="{% url 'logout' %}" class="menu-option">
+                    <div class="circle">
+                        <i class="fas fa-door-open"></i>
+                    </div>
+                </a></td>
                 <td></td>
             </tr>
         </table>

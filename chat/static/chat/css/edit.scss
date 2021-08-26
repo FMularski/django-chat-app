@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
+header {
+    padding: 2rem;
+    color: white;
+}
+
+form {
+    padding: 2rem;
+    width: 50%;
+    color: white;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    div#edit-form-left {
+        width: 50%;
+    }
+
+    div#edit-form-right {
+        margin-left: 3rem;
+        img {
+            width: 12rem;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+    }
+
+    input::-webkit-file-upload-button {
+        display: inline;
+        margin-top: 1rem;
+        margin-right: 1rem;
+        width: 8rem;
+        transition: all 0.3s ease;
+        background: white;
+        padding: .25rem .5rem .25rem .5rem;
+        border-radius: 5px;
+        color: black;
+        border: none;
+
+        &:hover, &:focus {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+}
+
+img#pencil {
+    height: 75rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    transform: translateX(-40%) translateY(-140%) rotateZ(20deg);
+
+    animation: slide-down 1s ease;
+    animation-delay: 1.5s;
+
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(3rem 5px 5px #222);
+
+}
+
+div#pencil-page {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 40%;
+    height: 50rem;
+    background: white;
+    z-index: -1;
+
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(3rem 5px 5px #222);
+
+    transform: rotateX(-20deg) rotateY(20deg);
+
+
+    p {
+        padding: 5rem;
+        font-size: 10rem;
+        font-family: 'Gloria Hallelujah', cursive;
+        color: rgb(82, 82, 82);
+    }
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateX(-40%) translateY(-140%) rotateZ(20deg);
+    } to {
+        transform: translateX(-40%) translateY(-40%) rotateZ(20deg);
+    }
+}
+
+@keyframes writing {
+    0% {
+        transform: translateX(-40%) translateY(-40%) rotateZ(20deg);    
+    }
+    15% {
+        transform: translateX(-40%) translateY(-40%) rotateZ(40deg);    
+    }
+    30% {
+        transform: translateX(-40%) translateY(-40%) rotateZ(10deg);    
+    }
+    45% {
+        transform: translateX(-40%) translateY(-40%) rotateZ(30deg);    
+    }
+    60% {
+        transform: translateX(-40%) translateY(-40%) rotateZ(20deg);    
+    }
+    100% {
+        transform: translateX(-40%) translateY(-40%) rotateZ(20deg);
+    }
+}
+
+
+
+@media screen and (max-width: 1500px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    html {
+        font-size: 70%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    html {
+        font-size: 60%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    html {
+        font-size: 35%;
+    }
+}
