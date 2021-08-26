@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block main %}
-    <form action="" method="POST">
+    <form action="" method="POST" class="transition-activator" enctype="multipart/form-data">
         {% csrf_token %}
         <div id="edit-form-left">
             <label>{{form.username.label}}</label>
@@ -29,7 +29,7 @@
         </div>
         <div id="edit-form-right">
             {% if user.profile.profile_img %}
-                <img src="{{user.profile.profile_img}}" class="profile_img_form">
+                <img src="{{user.profile.profile_img.url}}" class="profile_img_form">
             {% else %}
                 <img src="{% static '/chat/img/default_profile.png' %}" class="profile_img_form">
             {% endif %}
@@ -38,6 +38,8 @@
         </div>
 
     </form>
+
+    <a href="{% url 'index' %}" class="transition-activator hover-scale" id="back-btn"><i class="fas fa-arrow-left"></i> Return</a>
 
     <img id="pencil" src="{% static '/chat/img/white-pencil.png' %}">
     <div id="pencil-page">

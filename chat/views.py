@@ -1,8 +1,10 @@
+from django.db.utils import Error
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.db import IntegrityError
 from . import models, forms
 
 
@@ -49,6 +51,16 @@ def logout_user(request):
 @login_required(login_url='login')
 def edit(request):
     form = forms.UserProfileForm(instance=request.user.profile)
+
+    if request.method == 'POST':
+        form = forms.UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, 'User profile has been updated.')
+            except Error as e:
+                messages.error(request, e)
+
     context = {'form': form}
     return render(request, 'chat/edit.html', context)
 

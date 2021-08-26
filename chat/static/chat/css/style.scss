@@ -45,6 +45,28 @@ a#back-btn {
     }
 }
 
+
+div.popup {
+    z-index: 10;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    width: 30rem;
+    transition: all 0.3s ease;
+    color: white;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.5) .75rem .75rem; 
+    animation: error-dingle 0.3s ease;
+    
+    &.errors {
+        background: rgba(255, 0, 0, 0.4);
+    }
+    
+    &.success {
+        background: rgba(0, 255, 21, 0.55);
+    }
+}
+
 @keyframes back-btn {
     0% {
         transform: translateX(0);

@@ -16,14 +16,14 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=150, null=False)
     last_name = models.CharField(max_length=150, null=False)
     email = models.EmailField(null=False)
-    profile_img = models.ImageField(null=True)
+    profile_img = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
 
 
 @receiver(post_save, sender=User)
-def user_pre_save_handler(instance, created, **kwargs):
+def user_post_save_handler(instance, created, **kwargs):
     if created:
         profile = UserProfile()
         profile.user = instance
@@ -32,10 +32,12 @@ def user_pre_save_handler(instance, created, **kwargs):
         profile.last_name = instance.last_name
         profile.email = instance.email
         profile.save()
-    else:
-        profile = UserProfile.objects.get(user=instance)
-        profile.username = instance.username
-        profile.first_name = instance.first_name
-        profile.last_name = instance.last_name
-        profile.email = instance.email
-        profile.save()
+
+@receiver(post_save, sender=UserProfile)
+def user_profile_post_save_handler(instance, created, **kwargs):
+    if not created:
+        instance.user.username = instance.username
+        instance.user.first_name = instance.first_name
+        instance.user.last_name = instance.last_name
+        instance.user.email = instance.email
+        instance.user.save()

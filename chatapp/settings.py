@@ -143,3 +143,6 @@ EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'chat/static/chat/upload')
+MEDIA_URL = '/media/'
