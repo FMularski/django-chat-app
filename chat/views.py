@@ -71,13 +71,19 @@ def edit(request):
 
 @login_required(login_url='login')
 def friends(request):
-    context = {}
+    friends = request.user.profile.friends.all()
+    invitations = models.Invitation.objects.filter(send_to=request.user.profile).select_related('send_by')
+
+    context = {'friends': friends, 'invitations': invitations}
     return render(request, 'chat/friends.html', context)
 
 
+@login_required(login_url='login')
 def search(request, input):
     if request.is_ajax():
-        search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img').filter(username__istartswith=input)
+        search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img') \
+        .filter(username__istartswith=input) \
+        .filter(~Q(username=request.user.username))
         
         results = []
         for result in search_results:
@@ -90,4 +96,49 @@ def search(request, input):
         return JsonResponse(data=results, safe=False)
     
     return HttpResponseNotFound()
+
+
+@login_required(login_url='login')
+def invite_friend(request, pk):
+    if request.is_ajax():
+        friend = models.UserProfile.objects.get(pk=pk)
+        
+        invitation = models.Invitation()
+        invitation.send_by = request.user.profile
+        invitation.send_to = friend
+        invitation.save()
+
+        return JsonResponse(data={'status': 200}, safe=False)
+
+    return HttpResponseNotFound();
+
+
+@login_required(login_url='login')
+def accept_invitation(request, pk):
+    invitation = models.Invitation.objects.get(pk=pk)
+    send_to = invitation.send_to
+    send_by = invitation.send_by
+
+    send_to.friends.add(send_by)
+    send_to.save()
+
+    send_by.friends.add(send_to)
+    send_by.save()
+
+    invitation.delete()
+
+    return redirect(reverse('friends', ))
+
+
+@login_required(login_url='login')
+def decline_invitation(request, pk):
+    if request.is_ajax():
+        invitation = models.Invitation.objects.get(send_by__pk=pk)
+        invitation.delete()
+        
+        return JsonResponse(data={'status': 200}, safe=False)
+
+    return HttpResponseNotFound();
+
+
 

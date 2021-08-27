@@ -16,10 +16,20 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=150, null=False)
     last_name = models.CharField(max_length=150, null=False)
     email = models.EmailField(null=False)
-    profile_img = models.ImageField(null=True, blank=True, default='default_profile.png')
+    profile_img = models.ImageField(null=True, blank=True)
+    friend = models.ForeignKey('UserProfile', related_name='friends', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
+
+
+class Invitation(models.Model):
+    send_by = models.ForeignKey(UserProfile, null=False, on_delete=models.CASCADE, related_name='invitations_sent')
+    send_to = models.ForeignKey(UserProfile, null=False, on_delete=models.CASCADE, related_name='invitations_received')
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+
+    def __str__(self):
+        return f'from {self.send_by.username} to {self.send_to.username}'
 
 
 @receiver(post_save, sender=User)

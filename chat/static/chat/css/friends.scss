@@ -68,8 +68,48 @@ i.spinning {
     animation: spin .5s ease infinite;
 }
 
-p#no-results {
+p#no-results, p#no-invitations {
     padding: 2rem;
+}
+
+div.friend-record {
+    padding: 2rem 2rem 0rem 2rem;
+    img {
+        width: 4rem;
+        border: 3px solid white;
+        border-radius: 50%;
+    }
+    span {
+        margin-left: 1rem;
+    }
+}
+
+div#invitations {
+    div.invitation {
+        padding: 2rem 2rem 0rem 2rem;
+        img {
+            width: 4rem;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+        span {
+            margin-left: 1rem;
+        }
+
+        i.accept {
+            background: rgb(130, 248, 126);
+            padding: 0.5rem;
+            border-radius: 7px;
+            margin-left: 1rem;
+        }
+
+        i.decline {
+            background: rgb(247, 80, 80);
+            padding: .5rem .6rem .5rem .6rem;
+            border-radius: 7px;
+            margin-left: .5rem;
+        }
+    }
 }
 
 @keyframes spin {

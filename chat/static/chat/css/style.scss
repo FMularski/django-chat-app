@@ -39,6 +39,12 @@ body {
     align-items: center;
 }
 
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 a#back-btn {
     color: white;
     position: absolute;
@@ -60,10 +66,12 @@ div.popup {
     transition: all 0.3s ease;
     color: white;
     position: absolute;
+    opacity: 0;
     top: 1rem;
     right: 1rem;
     box-shadow: rgba(0, 0, 0, 0.5) .75rem .75rem; 
     animation: error-dingle 0.3s ease;
+    animation: popup-fade-out 5s linear;
     
     &.errors {
         background: rgba(255, 0, 0, 0.4);
@@ -71,6 +79,18 @@ div.popup {
     
     &.success {
         background: rgba(0, 255, 21, 0.55);
+    }
+}
+
+@keyframes popup-fade-out {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 

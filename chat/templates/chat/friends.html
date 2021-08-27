@@ -15,21 +15,52 @@
 
 {% block main %}
     <main class="flex-evenly">
+        {% csrf_token %}
         <div id="search-friends" class="friends-section">
             <h2>Search</h2>
             <div class="flex-between">
-                <input id="search-input" type="text" class="form-control w-75 hover-scale">
+                <input id="search-input" type="text" class="form-control w-75 hover-scale" placeholder="Enter friend's username...">
                 <div id="spinner"></div>
             </div>
-            <div id="search-results">
-                
-            </div>
+            <div id="search-results"></div>
         </div>
         <div id="my-friends" class="friends-section">
-            <h2>My Friends</h2>
+            <h2>My Friends ({{friends.count}})</h2>
+            {% for friend in friends %}
+                <div class="friend-record">
+                    {% if friend.profile_img %}
+                        <img src="{{friend.profile_img.url}}"/>
+                    {% else %}
+                        <img src="{% static '/chat/img/default_profile.png' %}">
+                    {% endif %}
+                    <span>{{friend.username}}</span>
+                </div>
+            {% endfor %}
         </div>
-        <div id="requests" class="friends-section">
-            <h2>Requests</h2>
+        <div id="invitations" class="friends-section">
+            <h2>Invitations</h2>
+            {% if invitations %}
+                {% for invitation in invitations %}
+                    <div class="invitation" id="invitation-{{invitation.send_by.pk}}">
+                        <div class="flex-evenly">
+                            <div>
+                                {% if invitation.send_by.profile_img %}
+                                    <img src="{{invitation.send_by.profile_img.url}}"/>
+                                {% else %}
+                                    <img src="{% static '/chat/img/default_profile.png' %}">
+                                {% endif %}
+                                <span>{{invitation.send_by.username}}</span>
+                            </div>
+                            <div class="flex-center">
+                                <i class="fas fa-check accept hover-scale" invite-id="{{invitation.send_by.pk}}"></i>
+                                <i class="fas fa-times decline hover-scale" invite-id="{{invitation.send_by.pk}}"></i>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p id="no-invitations">No pending invitations.</p>
+            {% endif %}
         </div>
     </main>
 

@@ -1,3 +1,4 @@
+# from chatapp.chat.views import register
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from . import models
@@ -10,3 +11,9 @@ class UserProfileAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(models.UserProfile, UserProfileAdmin)
+
+
+class InvitationAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(models.Invitation, InvitationAdmin)
