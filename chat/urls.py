@@ -25,5 +25,7 @@ urlpatterns = [
         template_name='chat/reset_password_templates/reset_password_complete.html'), 
         name='password_reset_complete'),
 
-    path('edit/', views.edit, name='edit')
+    path('edit/', views.edit, name='edit'),
+    path('friends/', views.friends, name='friends'),
+    path('ajax/search/<str:input>/', views.search, name='search')
 ]

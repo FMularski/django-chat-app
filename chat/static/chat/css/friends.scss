@@ -1,0 +1,82 @@
+* {
+    color: white;
+}
+
+header {
+    padding: 2rem;
+    h1 {
+        font-size: 5rem;
+    }
+}
+
+main {
+
+    div.friends-section {
+        width: 35rem;
+        height: 40rem;
+        border-right: 2px solid white;;
+    }
+
+    div.friends-section:last-child {
+        border: none;
+    }
+
+    div#search-results {
+        overflow-y: auto;
+        padding-top: 1rem;
+
+        div.result {
+            padding: 1rem 2rem 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+
+            img {
+                width: 4rem;
+                border: 3px solid white;
+                border-radius: 50%;
+            }
+
+            span {
+                margin-left: 1rem;
+            }
+
+            i {
+                background: rgb(130, 248, 126);
+                padding: 0.5rem;
+                border-radius: 7px;
+                margin-left: 5rem;
+            }
+
+
+        }
+    }
+}
+
+input#search-input {
+    display: block;
+    margin: 0;
+}
+
+div#spinner {
+    width: 2rem;
+}
+
+i.spinning {
+    font-size: 2rem;
+    animation: spin .5s ease infinite;
+}
+
+p#no-results {
+    padding: 2rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}

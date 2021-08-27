@@ -5,7 +5,11 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.db import IntegrityError
+from django.db.models import Q
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponse
+from django.core import serializers
 from . import models, forms
+import json
 
 
 
@@ -64,4 +68,26 @@ def edit(request):
     context = {'form': form}
     return render(request, 'chat/edit.html', context)
 
+
+@login_required(login_url='login')
+def friends(request):
+    context = {}
+    return render(request, 'chat/friends.html', context)
+
+
+def search(request, input):
+    if request.is_ajax():
+        search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img').filter(username__istartswith=input)
+        
+        results = []
+        for result in search_results:
+            results.append({
+                'pk': result.id, 
+                'username': result.username, 
+                'profile_img': result.profile_img.url if result.profile_img else '/static/chat/img/default_profile.png'
+            })
+
+        return JsonResponse(data=results, safe=False)
+    
+    return HttpResponseNotFound()
 

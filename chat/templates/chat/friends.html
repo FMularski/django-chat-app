@@ -1,0 +1,45 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static '/chat/css/friends.css' %}">
+{% endblock %}
+
+{% block title %} | Friends {% endblock %}
+
+{% block header %}
+    <header>
+        <h1>Friends</h1>
+    </header>
+{% endblock %}
+
+{% block main %}
+    <main class="flex-evenly">
+        <div id="search-friends" class="friends-section">
+            <h2>Search</h2>
+            <div class="flex-between">
+                <input id="search-input" type="text" class="form-control w-75 hover-scale">
+                <div id="spinner"></div>
+            </div>
+            <div id="search-results">
+                
+            </div>
+        </div>
+        <div id="my-friends" class="friends-section">
+            <h2>My Friends</h2>
+        </div>
+        <div id="requests" class="friends-section">
+            <h2>Requests</h2>
+        </div>
+    </main>
+
+
+    <a href="{% url 'index' %}" class="transition-activator hover-scale" id="back-btn"><i class="fas fa-arrow-left"></i> Return</a>
+    {% include 'chat/transition-in.html' %}
+    {% include 'chat/transition-out.html' %}
+{% endblock %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'chat/js/search.js' %}"></script>
+{% endblock %}

@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=150, null=False)
     last_name = models.CharField(max_length=150, null=False)
     email = models.EmailField(null=False)
-    profile_img = models.ImageField(null=True, blank=True)
+    profile_img = models.ImageField(null=True, blank=True, default='default_profile.png')
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
