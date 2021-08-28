@@ -25,7 +25,7 @@
             <div id="search-results"></div>
         </div>
         <div id="my-friends" class="friends-section">
-            <h2>My Friends ({{friends.count}})</h2>
+            <h2>My Friends (<span id="friends-count">{{friends.count}}</span>)</h2>
             {% for friend in friends %}
                 <div class="friend-record">
                     {% if friend.profile_img %}

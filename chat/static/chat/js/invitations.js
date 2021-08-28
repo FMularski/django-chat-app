@@ -1,38 +1,59 @@
 (function(){
-    const declineInvBtns = document.querySelectorAll('.decline');
 
-    declineInvBtns.forEach(function(btn) {
-
-        btn.addEventListener('click', function(){
-            const invitationToRemove = document.querySelector('#invitation-' + btn.getAttribute('invite-id'));
-            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    function handleInvitation(action, msg) {
+        const handleBtns = document.querySelectorAll('.' + action);
     
-            $.ajax({
-                url: '/ajax/decline/' + btn.getAttribute('invite-id') + '/',
-                method: 'POST',
-                headers: {'X-CSRFToken': csrftoken},
-                dataType: 'json',
-                success: function(response) {
-                    invitationToRemove.remove();
-                    const flash = document.createElement('div');
-                    flash.classList.add('popup');
-                    flash.classList.add('success');
-                    flash.innerHTML = '<h4><i class="fas fa-check-circle"></i> Success</h4>' + 
-                    '<b>The invitation has been declined.</b></div>';
-                    document.querySelector('body').append(flash);
+        handleBtns.forEach(function(btn) {
+    
+            btn.addEventListener('click', function(){
+                const senderId = btn.getAttribute('invite-id');
+                const invitationToRemove = document.querySelector('#invitation-' + senderId);
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+                $.ajax({
+                    url: '/ajax/' + action +'/' + senderId + '/',
+                    method: 'POST',
+                    headers: {'X-CSRFToken': csrftoken},
+                    dataType: 'json',
+                    success: function(response) {
+                        invitationToRemove.remove();
+                        const flash = document.createElement('div');
+                        flash.classList.add('popup');
+                        flash.classList.add('success');
+                        flash.innerHTML = '<h4><i class="fas fa-check-circle"></i> Success</h4>' + 
+                        '<b>' + msg +'</b></div>';
+                        document.querySelector('body').append(flash);
+    
+                        const invitationsCount = document.querySelectorAll('.invitation').length;
+    
+                        if(!invitationsCount) {
+                            const p = document.createElement('p');
+                            p.id = 'no-invitations';
+                            p.innerText = 'No pending invitations.';
+                            document.querySelector('#invitations').append(p);
+                        }
 
-                    const invitationsCount = document.querySelectorAll('.invitation').length;
+                        if (action == 'decline') return;
 
-                    if(!invitationsCount) {
-                        const p = document.createElement('p');
-                        p.id = 'no-invitations';
-                        p.innerText = 'No pending invitations.';
-                        document.querySelector('#invitations').append(p);
+                        const friendsCount = document.querySelector('#friends-count');
+                        friendsCount.innerText = parseInt(friendsCount.innerText) + 1;
+
+                        const friendsSection = document.querySelector('#my-friends');
+                        friendsSection.innerHTML += 
+                        '<div class="friend-record">' +
+                            '<img src="' + response.senderProfileImg + '"/>' + 
+                            '<span>' + response.senderUsername + '</span>'; + 
+                        '</div>';                        
                     }
-                    
-                }
+                })
             })
+    
         })
+        
+    }
 
-    })
+    // decline invitation
+    handleInvitation('decline', 'The invitation has been declined.');
+    handleInvitation('accept', 'The invitation has been accepted.');
+
 })();

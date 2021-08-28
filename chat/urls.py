@@ -30,5 +30,5 @@ urlpatterns = [
     path('ajax/search/<str:input>/', views.search, name='search'),
     path('ajax/invite/<int:pk>/', views.invite_friend, name='invite'),
     path('ajax/decline/<int:pk>/', views.decline_invitation, name='decline'),
-    path('accept_invitation/<int:pk>/', views.accept_invitation, name='accept'),
+    path('ajax/accept/<int:pk>/', views.accept_invitation, name='accept'),
 ]

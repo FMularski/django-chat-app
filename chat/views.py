@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.db import IntegrityError
-from django.db.models import Q
+from django.db.models import Q, Value, F
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponse
 from django.core import serializers
 from . import models, forms
@@ -83,15 +83,19 @@ def search(request, input):
     if request.is_ajax():
         search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img') \
         .filter(username__istartswith=input) \
-        .filter(~Q(username=request.user.username))
+        .filter(~Q(username=request.user.username)) \
+        .annotate(is_friend=Value(F('pk') in request.user.profile.friends.all()))
         
         results = []
         for result in search_results:
             results.append({
                 'pk': result.id, 
                 'username': result.username, 
-                'profile_img': result.profile_img.url if result.profile_img else '/static/chat/img/default_profile.png'
+                'profile_img': result.profile_img.url if result.profile_img else '/static/chat/img/default_profile.png',
+                'is_friend': result.is_friend
             })
+
+        print(results)
 
         return JsonResponse(data=results, safe=False)
     
@@ -115,19 +119,30 @@ def invite_friend(request, pk):
 
 @login_required(login_url='login')
 def accept_invitation(request, pk):
-    invitation = models.Invitation.objects.get(pk=pk)
-    send_to = invitation.send_to
-    send_by = invitation.send_by
+    if request.is_ajax():
+        invitation = models.Invitation.objects.get(send_by__pk=pk)
+        send_to = invitation.send_to
+        send_by = invitation.send_by
 
-    send_to.friends.add(send_by)
-    send_to.save()
+        send_to.friends.add(send_by)
+        send_to.save()
 
-    send_by.friends.add(send_to)
-    send_by.save()
+        send_by.friends.add(send_to)
+        send_by.save()
 
-    invitation.delete()
+        invitation.delete()
 
-    return redirect(reverse('friends', ))
+        return JsonResponse(
+            data={
+                'status': 200, 
+                'senderUsername': send_by.username, 
+                'senderProfileImg': send_by.profile_img.url \
+                    if send_by.profile_img else '/static/chat/img/default_profile.png'
+                }, 
+            safe=False
+        )
+
+    return HttpResponseNotFound();
 
 
 @login_required(login_url='login')
