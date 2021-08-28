@@ -15,7 +15,9 @@ import json
 
 @login_required(login_url='login')
 def index(request):
-    context = {}
+    context = {
+        'invites_count': models.Invitation.objects.filter(send_to=request.user.profile).count()
+    }
     return render(request, 'chat/index.html', context)
 
 
@@ -81,10 +83,11 @@ def friends(request):
 @login_required(login_url='login')
 def search(request, input):
     if request.is_ajax():
+        currentFriends = list(map(lambda friend: friend.username, request.user.profile.friends.all())) 
+
         search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img') \
         .filter(username__istartswith=input) \
-        .filter(~Q(username=request.user.username)) \
-        .annotate(is_friend=Value(F('pk') in request.user.profile.friends.all()))
+        .filter(~Q(username=request.user.username))
         
         results = []
         for result in search_results:
@@ -92,10 +95,8 @@ def search(request, input):
                 'pk': result.id, 
                 'username': result.username, 
                 'profile_img': result.profile_img.url if result.profile_img else '/static/chat/img/default_profile.png',
-                'is_friend': result.is_friend
+                'is_friend': result.username in currentFriends
             })
-
-        print(results)
 
         return JsonResponse(data=results, safe=False)
     

@@ -56,6 +56,11 @@ main div#search-results div.result i {
   margin-left: 5rem;
 }
 
+main div#search-results div.result i.disabled {
+  background: silver;
+  pointer-events: none;
+}
+
 input#search-input {
   display: block;
   margin: 0;
@@ -73,6 +78,17 @@ i.spinning {
 
 p#no-results, p#no-invitations {
   padding: 2rem;
+}
+
+img.flying-invitation {
+  -webkit-transform: rotateZ(-45deg);
+          transform: rotateZ(-45deg);
+  width: 4rem;
+  position: absolute;
+  bottom: -5rem;
+  left: 0;
+  -webkit-animation: flying-invitation 2s ease;
+          animation: flying-invitation 2s ease;
 }
 
 div.friend-record {
@@ -136,6 +152,28 @@ div#invitations div.invitation i.decline {
   to {
     -webkit-transform: rotateZ(360deg);
             transform: rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes flying-invitation {
+  from {
+    bottom: -5rem;
+    left: 0;
+  }
+  to {
+    bottom: 120%;
+    left: 80%;
+  }
+}
+
+@keyframes flying-invitation {
+  from {
+    bottom: -5rem;
+    left: 0;
+  }
+  to {
+    bottom: 120%;
+    left: 80%;
   }
 }
 /*# sourceMappingURL=friends.css.map */

@@ -31,7 +31,9 @@
                     '<div id="result-' + result.pk + '" class="result"><div>' +
                     '<img src="' + result.profile_img + '">' + 
                     '<span>' + result.username + '</span></div>' + 
-                    '<i class="fas fa-user-plus hover-scale invite-btn" invite-id="' + result.pk + '"></i>' + 
+                    '<i class="hover-scale invite-btn ' +
+                    (result.is_friend ? 'disabled fas fa-user-check' : 'fas fa-user-plus') +  
+                    '" invite-id="' + result.pk + '"></i>' + 
                     '</div>';
                 })
 
@@ -61,6 +63,15 @@
                                 '<b>The invitation has been sent.</b></div>';
                                 
                                 document.querySelector('body').append(flash);
+
+                                const flyingMsg = document.createElement('img');
+                                flyingMsg.setAttribute('src', '/static/chat/img/message.png');
+                                flyingMsg.setAttribute('class', 'flying-invitation');
+                                flyingMsg.addEventListener('animationend', function() {
+                                    this.remove();
+                                })
+
+                                document.querySelector('body').append(flyingMsg);
                             }
                         })
                         

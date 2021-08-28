@@ -47,6 +47,11 @@ main {
                 padding: 0.5rem;
                 border-radius: 7px;
                 margin-left: 5rem;
+
+                &.disabled {
+                    background: rgb(192, 192, 192);
+                    pointer-events: none;
+                }
             }
 
 
@@ -70,6 +75,16 @@ i.spinning {
 
 p#no-results, p#no-invitations {
     padding: 2rem;
+}
+
+img.flying-invitation {
+    transform: rotateZ(-45deg);
+    width: 4rem;
+    position: absolute;
+    bottom: -5rem;
+    left: 0;
+
+    animation: flying-invitation 2s ease;
 }
 
 div.friend-record {
@@ -118,5 +133,16 @@ div#invitations {
     }
     to {
         transform: rotateZ(360deg);
+    }
+}
+
+@keyframes flying-invitation {
+    from {
+        bottom: -5rem;
+        left: 0;
+    }
+    to {
+        bottom: 120%;
+        left: 80%;
     }
 }
