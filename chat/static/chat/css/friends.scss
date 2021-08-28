@@ -6,6 +6,7 @@ header {
     padding: 2rem;
     h1 {
         font-size: 5rem;
+        animation: title-slide-in 1s ease;
     }
 }
 
@@ -144,5 +145,17 @@ div#invitations {
     to {
         bottom: 120%;
         left: 80%;
+    }
+}
+
+@keyframes title-slide-in {
+    0% {
+        margin-left: -25%;
+    }
+    50% {
+        margin-left: -25%;
+    }
+    100% {
+        margin-left: none;
     }
 }

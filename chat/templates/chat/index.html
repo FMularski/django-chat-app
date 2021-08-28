@@ -29,6 +29,9 @@
                 <td>
                     <a href="{% url 'friends' %}" class="menu-option">
                         <div class="circle">
+                            {% if invites_count %}
+                                <div class="notification-counter">{{invites_count}}</div>
+                            {% endif %}
                             <i class="fas fa-user-friends"></i>
                         </div>
                     </a>
@@ -75,6 +78,7 @@
                     opt.innerText = '';
                     opt.style.transition = 'all 1s ease';
                     opt.style.transform = 'scale(55)';
+                    opt.style.zIndex= '1000';
                 })
             })
         })();

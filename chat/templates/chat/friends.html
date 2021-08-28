@@ -38,7 +38,7 @@
             {% endfor %}
         </div>
         <div id="invitations" class="friends-section">
-            <h2>Invitations</h2>
+            <h2>Invitations (<span id="invitations-count">{{invitations.count}}</span>)</h2>
             {% if invitations %}
                 {% for invitation in invitations %}
                     <div class="invitation" id="invitation-{{invitation.send_by.pk}}">

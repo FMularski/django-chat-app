@@ -41,6 +41,7 @@ main {
         border-radius: 50%;
         transition: all 0.3s ease;
 
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -49,6 +50,24 @@ main {
 
         &:hover {
             transform: scale(1.2);
+        }
+
+        div.notification-counter {
+            width: 4rem;
+            height: 4rem;
+            font-size: 2rem;
+            font-weight: bolder;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: red;
+            padding: 1rem;
+            border-radius: 50%;
+            color: white;
+            box-shadow: rgb(105, 1, 1) 5px 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

@@ -8,6 +8,8 @@ header {
 
 header h1 {
   font-size: 5rem;
+  -webkit-animation: title-slide-in 1s ease;
+          animation: title-slide-in 1s ease;
 }
 
 main div.friends-section {
@@ -174,6 +176,30 @@ div#invitations div.invitation i.decline {
   to {
     bottom: 120%;
     left: 80%;
+  }
+}
+
+@-webkit-keyframes title-slide-in {
+  0% {
+    margin-left: -25%;
+  }
+  50% {
+    margin-left: -25%;
+  }
+  100% {
+    margin-left: none;
+  }
+}
+
+@keyframes title-slide-in {
+  0% {
+    margin-left: -25%;
+  }
+  50% {
+    margin-left: -25%;
+  }
+  100% {
+    margin-left: none;
   }
 }
 /*# sourceMappingURL=friends.css.map */

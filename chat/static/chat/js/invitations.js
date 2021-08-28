@@ -32,11 +32,15 @@
                             p.innerText = 'No pending invitations.';
                             document.querySelector('#invitations').append(p);
                         }
-
+                        
+                        const invitesCount = document.querySelector('#invitations-count');
+                        invitesCount.innerText = parseInt(invitesCount.innerText) - 1;
+                        
                         if (action == 'decline') return;
 
                         const friendsCount = document.querySelector('#friends-count');
                         friendsCount.innerText = parseInt(friendsCount.innerText) + 1;
+
 
                         const friendsSection = document.querySelector('#my-friends');
                         friendsSection.innerHTML += 
