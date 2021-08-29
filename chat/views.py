@@ -83,19 +83,22 @@ def friends(request):
 @login_required(login_url='login')
 def search(request, input):
     if request.is_ajax():
-        currentFriends = list(map(lambda friend: friend.username, request.user.profile.friends.all())) 
-
         search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img') \
         .filter(username__istartswith=input) \
         .filter(~Q(username=request.user.username))
         
+        currentFriends = list(map(lambda friend: friend.username, request.user.profile.friends.all()))
         results = []
         for result in search_results:
+
+            is_pending = models.Invitation.objects.filter(send_to=result, send_by=request.user.profile).exists()
+            status = 'pending' if is_pending else 'is_friend' if result.username in currentFriends else 'available'
+            
             results.append({
                 'pk': result.id, 
                 'username': result.username, 
                 'profile_img': result.profile_img.url if result.profile_img else '/static/chat/img/default_profile.png',
-                'is_friend': result.username in currentFriends
+                'status': status
             })
 
         return JsonResponse(data=results, safe=False)
@@ -122,20 +125,19 @@ def invite_friend(request, pk):
 def accept_invitation(request, pk):
     if request.is_ajax():
         invitation = models.Invitation.objects.get(send_by__pk=pk)
+
         send_to = invitation.send_to
         send_by = invitation.send_by
 
         send_to.friends.add(send_by)
-        send_to.save()
-
         send_by.friends.add(send_to)
-        send_by.save()
 
         invitation.delete()
 
         return JsonResponse(
             data={
-                'status': 200, 
+                'status': 200,
+                'senderId': send_by.pk, 
                 'senderUsername': send_by.username, 
                 'senderProfileImg': send_by.profile_img.url \
                     if send_by.profile_img else '/static/chat/img/default_profile.png'
@@ -157,4 +159,15 @@ def decline_invitation(request, pk):
     return HttpResponseNotFound();
 
 
+@login_required(login_url='login')
+def delete_friend(request, pk):
+    if request.is_ajax():
+        friend_to_delete = models.UserProfile.objects.get(pk=pk)
+        user_profile = models.UserProfile.objects.get(pk=request.user.profile.pk)
 
+        user_profile.friends.remove(friend_to_delete)
+        friend_to_delete.friends.remove(user_profile)
+
+        return JsonResponse({'status': 200}, safe=False)
+
+    return HttpResponseNotFound()

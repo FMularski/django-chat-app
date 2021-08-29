@@ -16,6 +16,8 @@ main div.friends-section {
   width: 35rem;
   height: 40rem;
   border-right: 2px solid white;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 main div.friends-section:last-child {
@@ -59,8 +61,15 @@ main div#search-results div.result i {
 }
 
 main div#search-results div.result i.disabled {
-  background: silver;
   pointer-events: none;
+}
+
+main div#search-results div.result i.accepted {
+  background: silver;
+}
+
+main div#search-results div.result i.pending {
+  background: #4d90f5;
 }
 
 input#search-input {
@@ -95,6 +104,7 @@ img.flying-invitation {
 
 div.friend-record {
   padding: 2rem 2rem 0rem 2rem;
+  width: 100%;
 }
 
 div.friend-record img {
@@ -105,6 +115,21 @@ div.friend-record img {
 
 div.friend-record span {
   margin-left: 1rem;
+}
+
+div.friend-record i {
+  background: #f75050;
+  padding: .5rem .6rem .5rem .6rem;
+  border-radius: 7px;
+  -webkit-transition: all 0s ease;
+  transition: all 0s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+div.friend-record:hover i {
+  opacity: 1;
+  pointer-events: all;
 }
 
 div#invitations div.invitation {
@@ -133,6 +158,66 @@ div#invitations div.invitation i.decline {
   padding: .5rem .6rem .5rem .6rem;
   border-radius: 7px;
   margin-left: .5rem;
+}
+
+div#dark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+div#dark.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+div#confirm-delete {
+  background: white;
+  border-radius: 2rem;
+  -webkit-box-shadow: #b1b1b1 10px 10px;
+          box-shadow: #b1b1b1 10px 10px;
+  z-index: 11;
+  width: 35rem;
+  padding: 2rem;
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+}
+
+div#confirm-delete h2, div#confirm-delete p, div#confirm-delete span {
+  color: #a8a8a8;
+}
+
+div#confirm-delete span {
+  font-weight: bold;
+}
+
+div#confirm-delete i#confirm-delete-btn {
+  background: #82f87e;
+  padding: 0.5rem;
+  border-radius: 7px;
+}
+
+div#confirm-delete i#cancel-delete-btn {
+  background: #f75050;
+  padding: .5rem .6rem .5rem .6rem;
+  border-radius: 7px;
+}
+
+div#confirm-delete.active {
+  top: 40%;
 }
 
 @-webkit-keyframes spin {

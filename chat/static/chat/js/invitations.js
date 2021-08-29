@@ -41,13 +41,29 @@
                         const friendsCount = document.querySelector('#friends-count');
                         friendsCount.innerText = parseInt(friendsCount.innerText) + 1;
 
-
                         const friendsSection = document.querySelector('#my-friends');
                         friendsSection.innerHTML += 
-                        '<div class="friend-record">' +
-                            '<img src="' + response.senderProfileImg + '"/>' + 
-                            '<span>' + response.senderUsername + '</span>'; + 
+                        '<div class="friend-record flex-between">' +
+                            '<div>' +
+                                '<img src="' + response.senderProfileImg + '"/>' + 
+                                '<span>' + response.senderUsername + '</span>' +
+                            '</div>' +
+                            '<i class="delete-btn delete-btn-' + response.senderId + ' fas fa-minus hover-scale"' +
+                            'del-username="' + response.senderUsername + '"' +
+                            'del-id="' + response.senderId + '"></i>' +
                         '</div>';                        
+                        
+                        const newDeleteBtn = document.querySelector('.delete-btn-' + response.senderId);
+                        console.log(newDeleteBtn);
+                        newDeleteBtn.addEventListener('click', function() {
+                            document.querySelector('#dark').classList.add('active');
+                            document.querySelector('#confirm-delete').classList.add('active');
+
+                            document.querySelector('#delete-username').innerText = newDeleteBtn.getAttribute('del-username');
+                            document.querySelector('#confirm-delete-btn').setAttribute('del-id', newDeleteBtn.getAttribute('del-id'));
+                            
+                            newDeleteBtn.parentElement.classList.add('to-be-removed');
+                        })
                     }
                 })
             })

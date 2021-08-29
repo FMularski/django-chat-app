@@ -31,4 +31,5 @@ urlpatterns = [
     path('ajax/invite/<int:pk>/', views.invite_friend, name='invite'),
     path('ajax/decline/<int:pk>/', views.decline_invitation, name='decline'),
     path('ajax/accept/<int:pk>/', views.accept_invitation, name='accept'),
+    path('ajax/delete_friend/<int:pk>/', views.delete_friend, name='delete_friend'),
 ]

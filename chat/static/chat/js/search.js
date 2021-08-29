@@ -26,13 +26,14 @@
                     return;
                 }
 
-                response.forEach(function(result){
+                response.forEach(function(result) {
                     resultsBox.innerHTML += 
                     '<div id="result-' + result.pk + '" class="result"><div>' +
                     '<img src="' + result.profile_img + '">' + 
                     '<span>' + result.username + '</span></div>' + 
                     '<i class="hover-scale invite-btn ' +
-                    (result.is_friend ? 'disabled fas fa-user-check' : 'fas fa-user-plus') +  
+                    (result.status == 'pending' ? 'disabled pending far fa-clock' : 
+                    (result.status == 'is_friend' ? 'disabled accepted fas fa-user-check' : 'fas fa-user-plus')) + 
                     '" invite-id="' + result.pk + '"></i>' + 
                     '</div>';
                 })

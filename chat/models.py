@@ -17,7 +17,8 @@ class UserProfile(models.Model):
     last_name = models.CharField(max_length=150, null=False)
     email = models.EmailField(null=False)
     profile_img = models.ImageField(null=True, blank=True)
-    friend = models.ForeignKey('UserProfile', related_name='friends', on_delete=models.SET_NULL, null=True, blank=True)
+    friends = models.ManyToManyField('UserProfile', related_name='profiles_with_this_in_friends', blank=True)
+    # friend = models.ForeignKey('UserProfile', related_name='friends', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username}\'s profile'

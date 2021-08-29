@@ -16,6 +16,9 @@ main {
         width: 35rem;
         height: 40rem;
         border-right: 2px solid white;;
+
+       padding-left: 2rem;
+       padding-right: 2rem;
     }
 
     div.friends-section:last-child {
@@ -50,8 +53,15 @@ main {
                 margin-left: 5rem;
 
                 &.disabled {
-                    background: rgb(192, 192, 192);
                     pointer-events: none;
+                }
+
+                &.accepted {
+                    background: rgb(192, 192, 192);
+                }
+
+                &.pending {
+                    background: rgb(77, 144, 245);
                 }
             }
 
@@ -90,6 +100,7 @@ img.flying-invitation {
 
 div.friend-record {
     padding: 2rem 2rem 0rem 2rem;
+    width: 100%;
     img {
         width: 4rem;
         border: 3px solid white;
@@ -97,6 +108,20 @@ div.friend-record {
     }
     span {
         margin-left: 1rem;
+    }
+
+    i {
+        background: rgb(247, 80, 80);
+        padding: .5rem .6rem .5rem .6rem;
+        border-radius: 7px;
+        transition: all 0s ease;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &:hover i {
+        opacity: 1;
+        pointer-events: all;
     }
 }
 
@@ -125,6 +150,63 @@ div#invitations {
             border-radius: 7px;
             margin-left: .5rem;
         }
+    }
+}
+
+div#dark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    opacity: 0;
+    pointer-events: none;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+div#confirm-delete {
+    background: white;
+    border-radius: 2rem;
+    box-shadow: rgb(177, 177, 177) 10px 10px;
+    z-index: 11;
+    width: 35rem;
+    padding: 2rem;
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transition: all 0.3s ease;
+    transform: translateX(-50%) translateY(-50%);
+    
+    h2, p, span {
+        color: rgb(168, 168, 168);
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+    i#confirm-delete-btn {
+        background: rgb(130, 248, 126);
+        padding: 0.5rem;
+        border-radius: 7px;
+    }
+
+    i#cancel-delete-btn {
+        background: rgb(247, 80, 80);
+        padding: .5rem .6rem .5rem .6rem;
+        border-radius: 7px;
+    }
+
+    &.active {
+        top: 40%;
     }
 }
 
