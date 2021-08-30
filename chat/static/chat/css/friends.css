@@ -72,12 +72,12 @@ main div#search-results div.result i.pending {
   background: #4d90f5;
 }
 
-input#search-input {
+input#search-input, #filteer-input {
   display: block;
   margin: 0;
 }
 
-div#spinner {
+div#spinner, div#filter-spinner {
   width: 2rem;
 }
 
@@ -121,8 +121,8 @@ div.friend-record i {
   background: #f75050;
   padding: .5rem .6rem .5rem .6rem;
   border-radius: 7px;
-  -webkit-transition: all 0s ease;
-  transition: all 0s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
   opacity: 0;
   pointer-events: none;
 }
@@ -285,6 +285,28 @@ div#confirm-delete.active {
   }
   100% {
     margin-left: none;
+  }
+}
+
+@-webkit-keyframes shrink-record {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes shrink-record {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
   }
 }
 /*# sourceMappingURL=friends.css.map */

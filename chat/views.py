@@ -124,7 +124,7 @@ def invite_friend(request, pk):
 @login_required(login_url='login')
 def accept_invitation(request, pk):
     if request.is_ajax():
-        invitation = models.Invitation.objects.get(send_by__pk=pk)
+        invitation = models.Invitation.objects.get(pk=pk)
 
         send_to = invitation.send_to
         send_by = invitation.send_by
@@ -151,9 +151,8 @@ def accept_invitation(request, pk):
 @login_required(login_url='login')
 def decline_invitation(request, pk):
     if request.is_ajax():
-        invitation = models.Invitation.objects.get(send_by__pk=pk)
+        invitation = models.Invitation.objects.get(pk=pk)
         invitation.delete()
-        
         return JsonResponse(data={'status': 200}, safe=False)
 
     return HttpResponseNotFound();
@@ -168,6 +167,6 @@ def delete_friend(request, pk):
         user_profile.friends.remove(friend_to_delete)
         friend_to_delete.friends.remove(user_profile)
 
-        return JsonResponse({'status': 200}, safe=False)
+        return JsonResponse({'username': friend_to_delete.username}, safe=False)
 
     return HttpResponseNotFound()

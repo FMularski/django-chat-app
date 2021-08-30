@@ -70,12 +70,12 @@ main {
     }
 }
 
-input#search-input {
+input#search-input, #filteer-input {
     display: block;
     margin: 0;
 }
 
-div#spinner {
+div#spinner, div#filter-spinner {
     width: 2rem;
 }
 
@@ -114,7 +114,7 @@ div.friend-record {
         background: rgb(247, 80, 80);
         padding: .5rem .6rem .5rem .6rem;
         border-radius: 7px;
-        transition: all 0s ease;
+        transition: all 0.3s ease;
         opacity: 0;
         pointer-events: none;
     }
@@ -239,5 +239,13 @@ div#confirm-delete {
     }
     100% {
         margin-left: none;
+    }
+}
+
+@keyframes shrink-record {
+    from {
+        transform: scale(1);
+    } to {
+        transform: scale(0);
     }
 }

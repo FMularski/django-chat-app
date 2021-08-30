@@ -68,6 +68,8 @@ main {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            animation: hover-pulse 1s ease infinite;
         }
     }
 }

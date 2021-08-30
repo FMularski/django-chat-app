@@ -45,7 +45,22 @@
                 inviteBtns.forEach(function(btn) {
                     btn.addEventListener('click', function(){
                         const recordToRemove = document.querySelector('#result-' + btn.getAttribute('invite-id'));
+
+                        recordToRemove.style.animation = 'shrink-record 0.3s ease';
+                        recordToRemove.addEventListener('animationend', function() {
+                            recordToRemove.remove()
+                        })
+       
                         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                        const flyingMsg = document.createElement('img');
+                        flyingMsg.setAttribute('src', '/static/chat/img/message.png');
+                        flyingMsg.setAttribute('class', 'flying-invitation');
+                        flyingMsg.addEventListener('animationend', function() {
+                            this.remove();
+                        })
+
+                        document.querySelector('body').append(flyingMsg);
 
                         $.ajax({
                             url: '/ajax/invite/' + btn.getAttribute('invite-id') + '/',
@@ -55,24 +70,12 @@
                             method: 'POST',
                             dataType: 'json',
                             success: function(response) {
-                                recordToRemove.remove()
-
                                 const flash = document.createElement('div');
                                 flash.classList.add('popup');
                                 flash.classList.add('success');
                                 flash.innerHTML = '<h4><i class="fas fa-check-circle"></i> Success</h4>' + 
                                 '<b>The invitation has been sent.</b></div>';
-                                
                                 document.querySelector('body').append(flash);
-
-                                const flyingMsg = document.createElement('img');
-                                flyingMsg.setAttribute('src', '/static/chat/img/message.png');
-                                flyingMsg.setAttribute('class', 'flying-invitation');
-                                flyingMsg.addEventListener('animationend', function() {
-                                    this.remove();
-                                })
-
-                                document.querySelector('body').append(flyingMsg);
                             }
                         })
                         

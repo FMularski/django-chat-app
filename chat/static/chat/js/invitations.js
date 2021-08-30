@@ -6,17 +6,34 @@
         handleBtns.forEach(function(btn) {
     
             btn.addEventListener('click', function(){
-                const senderId = btn.getAttribute('invite-id');
-                const invitationToRemove = document.querySelector('#invitation-' + senderId);
+                const invitationId = btn.getAttribute('invite-id');
+                const invitationToRemove = document.querySelector('#invitation-' + invitationId);
                 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        
+                
+                const invitesCount = document.querySelector('#invitations-count');
+                invitesCount.innerText = parseInt(invitesCount.innerText) - 1;
+
+                invitationToRemove.style.animation = 'shrink-record 0.3s ease';
+                invitationToRemove.addEventListener('animationend', function() {
+
+                    invitationToRemove.remove() 
+
+                    const invitationsCount = document.querySelectorAll('.invitation').length;
+                    if (invitationsCount) return;
+    
+                    const p = document.createElement('p');
+                    p.id = 'no-invitations';
+                    p.innerText = 'No pending invitations.';
+                    document.querySelector('#invitations').append(p);
+                });
+
+                
                 $.ajax({
-                    url: '/ajax/' + action +'/' + senderId + '/',
+                    url: '/ajax/' + action +'/' + invitationId + '/',
                     method: 'POST',
                     headers: {'X-CSRFToken': csrftoken},
                     dataType: 'json',
                     success: function(response) {
-                        invitationToRemove.remove();
                         const flash = document.createElement('div');
                         flash.classList.add('popup');
                         flash.classList.add('success');
@@ -24,17 +41,6 @@
                         '<b>' + msg +'</b></div>';
                         document.querySelector('body').append(flash);
     
-                        const invitationsCount = document.querySelectorAll('.invitation').length;
-    
-                        if(!invitationsCount) {
-                            const p = document.createElement('p');
-                            p.id = 'no-invitations';
-                            p.innerText = 'No pending invitations.';
-                            document.querySelector('#invitations').append(p);
-                        }
-                        
-                        const invitesCount = document.querySelector('#invitations-count');
-                        invitesCount.innerText = parseInt(invitesCount.innerText) - 1;
                         
                         if (action == 'decline') return;
 
@@ -54,7 +60,6 @@
                         '</div>';                        
                         
                         const newDeleteBtn = document.querySelector('.delete-btn-' + response.senderId);
-                        console.log(newDeleteBtn);
                         newDeleteBtn.addEventListener('click', function() {
                             document.querySelector('#dark').classList.add('active');
                             document.querySelector('#confirm-delete').classList.add('active');
