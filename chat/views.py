@@ -170,3 +170,14 @@ def delete_friend(request, pk):
         return JsonResponse({'username': friend_to_delete.username}, safe=False)
 
     return HttpResponseNotFound()
+
+
+@login_required(login_url='login')
+def filter_friends(request, input):
+    if request.is_ajax():
+        filtered_out = list(request.user.profile.friends.filter(~Q(username__istartswith=input)).values('pk'))
+        
+        filtered_out_ids = [dictionary.get('pk') for dictionary in filtered_out]    
+
+        return JsonResponse(data={'idsToHide': filtered_out_ids})
+    return HttpResponseNotFound()

@@ -104,6 +104,8 @@ img.flying-invitation {
 
 div.friend-record {
   padding: 2rem 2rem 0rem 2rem;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
   width: 100%;
 }
 
@@ -130,6 +132,10 @@ div.friend-record i {
 div.friend-record:hover i {
   opacity: 1;
   pointer-events: all;
+}
+
+div.friend-record.hidden {
+  display: none;
 }
 
 div#invitations div.invitation {

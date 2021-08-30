@@ -49,7 +49,7 @@
 
                         const friendsSection = document.querySelector('#my-friends');
                         friendsSection.innerHTML += 
-                        '<div class="friend-record flex-between">' +
+                        '<div class="friend-record flex-between" id="friend-record-' + response.senderId + '">' +
                             '<div>' +
                                 '<img src="' + response.senderProfileImg + '"/>' + 
                                 '<span>' + response.senderUsername + '</span>' +

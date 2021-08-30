@@ -20,7 +20,7 @@
             <h2>Search</h2>
             <div class="flex-between">
                 <input id="search-input" type="text" class="form-control w-75 hover-scale" placeholder="Enter friend's username...">
-                <div id="spinner-filter"></div>
+                <div id="spinner"></div>
             </div>
             <div id="search-results"></div>
         </div>
@@ -28,10 +28,10 @@
             <h2>My Friends (<span id="friends-count">{{friends.count}}</span>)</h2>
             <div class="flex-between">
                 <input id="filter-input" type="text" class="form-control w-75 hover-scale" placeholder="Filter friends...">
-                <div id="filteer-spinner"></div>
+                <div id="filter-spinner"></div>
             </div>
             {% for friend in friends %}
-                <div class="friend-record flex-between">
+                <div class="friend-record flex-between" id="friend-record-{{friend.pk}}">
                     <div>
                         {% if friend.profile_img %}
                             <img src="{{friend.profile_img.url}}"/>
@@ -92,4 +92,5 @@
     <script src="{% static '/chat/js/search.js' %}"></script>
     <script src="{% static '/chat/js/invitations.js' %}"></script>
     <script src="{% static '/chat/js/delete.js' %}"></script>
+    <script src="{% static '/chat/js/filter.js' %}"></script>
 {% endblock %}
