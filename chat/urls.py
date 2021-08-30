@@ -26,6 +26,7 @@ urlpatterns = [
         name='password_reset_complete'),
 
     path('edit/', views.edit, name='edit'),
+
     path('friends/', views.friends, name='friends'),
     path('ajax/search/<str:input>/', views.search, name='search'),
     path('ajax/invite/<int:pk>/', views.invite_friend, name='invite'),
@@ -33,4 +34,6 @@ urlpatterns = [
     path('ajax/accept/<int:pk>/', views.accept_invitation, name='accept'),
     path('ajax/delete_friend/<int:pk>/', views.delete_friend, name='delete_friend'),
     path('ajax/filter/<str:input>/', views.filter_friends, name='filter_friends'),
+
+    path('chat_rooms/', views.chat_rooms, name='chat_rooms'),
 ]

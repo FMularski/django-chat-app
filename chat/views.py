@@ -181,3 +181,9 @@ def filter_friends(request, input):
 
         return JsonResponse(data={'idsToHide': filtered_out_ids})
     return HttpResponseNotFound()
+
+
+@login_required(login_url='login')
+def chat_rooms(request):
+    context = {}
+    return render(request, 'chat/chatrooms.html', context)

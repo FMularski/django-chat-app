@@ -1,0 +1,13 @@
+header {
+  min-height: 10vh;
+}
+
+header h1 {
+  padding: 2rem;
+  color: white;
+}
+
+main {
+  min-height: 90vh;
+}
+/*# sourceMappingURL=chatrooms.css.map */
