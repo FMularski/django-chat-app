@@ -254,3 +254,21 @@ div#confirm-delete {
         transform: scale(0);
     }
 }
+
+@media screen and (max-width:1200px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    html {
+        font-size: 65%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    html {
+        font-size: 50%;
+    }
+}
