@@ -45,6 +45,7 @@ main div#search-results div.result {
 
 main div#search-results div.result img {
   width: 4rem;
+  height: 4rem;
   border: 3px solid white;
   border-radius: 50%;
 }
@@ -111,6 +112,7 @@ div.friend-record {
 
 div.friend-record img {
   width: 4rem;
+  height: 4rem;
   border: 3px solid white;
   border-radius: 50%;
 }
@@ -144,6 +146,7 @@ div#invitations div.invitation {
 
 div#invitations div.invitation img {
   width: 4rem;
+  height: 4rem;
   border: 3px solid white;
   border-radius: 50%;
 }

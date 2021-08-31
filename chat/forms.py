@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import get_user_model
 from django import forms
+from django.forms import widgets
 from . import models
 
 
@@ -48,4 +49,14 @@ class UserProfileForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'})
+        }
+
+
+class RoomForm(forms.ModelForm):
+    class Meta:
+        model = models.Room
+        fields = 'name', 
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'})
         }

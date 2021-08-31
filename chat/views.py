@@ -3,13 +3,9 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
-from django.db import IntegrityError
-from django.db.models import Q, Value, F
-from django.http import JsonResponse, HttpResponseNotFound, HttpResponse
-from django.core import serializers
+from django.db.models import Q
+from django.http import JsonResponse, HttpResponseNotFound
 from . import models, forms
-import json
 
 
 
@@ -185,5 +181,8 @@ def filter_friends(request, input):
 
 @login_required(login_url='login')
 def chat_rooms(request):
-    context = {}
+    friends = request.user.profile.friends.only('pk', 'username', 'profile_img')
+    form = forms.RoomForm()
+
+    context = {'form': form, 'room_friends': friends}
     return render(request, 'chat/chat_rooms.html', context)

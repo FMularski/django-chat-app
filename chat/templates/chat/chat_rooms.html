@@ -98,12 +98,38 @@
 
     <div id="dark" class=""></div>
     <div id="create-room-panel">
-        <h2>Create Room</h2>
+        <h2 class="flex-between">
+            <span>Create Room</span>
+            <i class="fas fa-times hover-scale" id="close-create-room-btn"></i>
+        </h2>
         <form action="">
             {% csrf_token %}
-            {{form}}
+            <label>{{form.name.label}}</label>
+            {{form.name}} <br>
+            <h2 class="flex-between">
+                <span>Select friends</span> 
+                <input type="text" type="filter-friends" placeholder="Filter..." class="form-control w-50">
+            </h2>
+            <div id="friends-selection">
+                {% for friend in room_friends %}
+                <div class="form-check flex-start">
+                    <input class="form-check-input hover-scale" type="checkbox" value="{{friend.pk}}" name="friends">
+                    <label class="form-check-label">
+                        {% if friend.profile_img %}
+                            <img src="{{friend.profile_img.url}}" class="user-portrait"/>
+                        {% else %}
+                            <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}" >
+                        {% endif %}
+                        {{friend.username}}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+            <br>
+            <input type="submit" value="Create" class="btn btn-outline-dark hover-scale">
         </form>
     </div>
+    
 
 
 {% endblock %}
@@ -114,4 +140,6 @@
             messages.scrollTop = messages.scrollHeight;
         })();
     </script>
+
+    <script src="{% static '/chat/js/create_room_form.js' %}"></script>
 {% endblock %}
