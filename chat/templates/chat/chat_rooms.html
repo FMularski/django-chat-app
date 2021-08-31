@@ -108,21 +108,23 @@
             {{form.name}} <br>
             <h2 class="flex-between">
                 <span>Select friends</span> 
-                <input type="text" type="filter-friends" placeholder="Filter..." class="form-control w-50">
+                <div id="filter-spinner"></div>
+                <input type="text" id="filter-friends" placeholder="Filter..." class="form-control w-50">
             </h2>
+            <span class="btn btn-outline-dark hover-scale" id="uncheck-btn">Uncheck all</span>
             <div id="friends-selection">
                 {% for friend in room_friends %}
-                <div class="form-check flex-start">
-                    <input class="form-check-input hover-scale" type="checkbox" value="{{friend.pk}}" name="friends">
-                    <label class="form-check-label">
-                        {% if friend.profile_img %}
-                            <img src="{{friend.profile_img.url}}" class="user-portrait"/>
-                        {% else %}
-                            <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}" >
-                        {% endif %}
-                        {{friend.username}}
-                    </label>
-                </div>
+                    <div class="form-check flex-start add-friend-record" id="add-friend-{{friend.pk}}">
+                        <input class="form-check-input hover-scale" type="checkbox" value="{{friend.pk}}" name="friends">
+                        <label class="form-check-label">
+                            {% if friend.profile_img %}
+                                <img src="{{friend.profile_img.url}}" class="user-portrait"/>
+                            {% else %}
+                                <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}" >
+                            {% endif %}
+                            {{friend.username}}
+                        </label>
+                    </div>
                 {% endfor %}
             </div>
             <br>
@@ -134,12 +136,12 @@
 
 {% endblock %}
 {% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static '/chat/js/create_room_form.js' %}"></script>
     <script>
         (function(){
             const messages = document.querySelector('#messages');
-            messages.scrollTop = messages.scrollHeight;
+            if (messages) messages.scrollTop = messages.scrollHeight;
         })();
     </script>
-
-    <script src="{% static '/chat/js/create_room_form.js' %}"></script>
 {% endblock %}

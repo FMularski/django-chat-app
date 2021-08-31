@@ -260,12 +260,32 @@ div#create-room-panel {
     transform: translateX(-50%);
 
     &.active {
-        top: 20%;
+        top: 10%;
+    }
+
+    
+    div#filter-spinner {
+        width: 2rem;
+
+        i.spinning {
+            font-size: 2rem;
+            animation: spin .5s ease infinite;
+        }        
+    }
+
+    span#uncheck-btn {
+        margin-bottom: 0.5rem;
     }
 
     div#friends-selection {
         max-height: 10rem;
         overflow-y: auto;
+
+        div.add-friend-record {
+            &.hidden {
+                display: none;
+            }
+        }
     }
 
     img {
@@ -277,5 +297,32 @@ div#create-room-panel {
         width: 50%;
         display: block;
         margin: auto;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+@media screen and (max-width:1200px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    html {
+        font-size: 65%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    html {
+        font-size: 50%;
     }
 }

@@ -270,12 +270,30 @@ div#create-room-panel {
 }
 
 div#create-room-panel.active {
-  top: 20%;
+  top: 10%;
+}
+
+div#create-room-panel div#filter-spinner {
+  width: 2rem;
+}
+
+div#create-room-panel div#filter-spinner i.spinning {
+  font-size: 2rem;
+  -webkit-animation: spin .5s ease infinite;
+          animation: spin .5s ease infinite;
+}
+
+div#create-room-panel span#uncheck-btn {
+  margin-bottom: 0.5rem;
 }
 
 div#create-room-panel div#friends-selection {
   max-height: 10rem;
   overflow-y: auto;
+}
+
+div#create-room-panel div#friends-selection div.add-friend-record.hidden {
+  display: none;
 }
 
 div#create-room-panel img {
@@ -287,5 +305,45 @@ div#create-room-panel input[type="submit"] {
   width: 50%;
   display: block;
   margin: auto;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  to {
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  to {
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 65%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  html {
+    font-size: 50%;
+  }
 }
 /*# sourceMappingURL=chat_rooms.css.map */
