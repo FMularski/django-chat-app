@@ -101,20 +101,20 @@ div.popup {
     width: 10px;
   }
   
-  /* Track */
+//   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: transparent;
   }
    
-  /* Handle */
+//   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: rgb(223, 223, 223); 
     border-radius: 4px;
   }
   
-  /* Handle on hover */
+//   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: rgb(202, 202, 202); 
   }
 
 @keyframes popup-fade-out {

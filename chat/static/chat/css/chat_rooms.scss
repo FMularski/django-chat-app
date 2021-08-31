@@ -52,6 +52,18 @@ div.chat-room-record {
     }
 }
 
+a#back {
+    text-align: center;
+    padding: 1rem;
+    background: rgb(212, 212, 212);
+    text-decoration: none;
+    color: white;
+
+    i{
+        animation: back-btn 1s linear infinite;
+    }
+}
+
 
 img.user-portrait {
     width: 3rem;
@@ -71,9 +83,12 @@ div#chat-room-content {
 }
 
 div#chat-room-header {
-    background: gray;
+    background: rgb(230, 230, 230);
     padding: 2rem;
     color: white;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
 
     b {
         font-size: 1.6rem;
@@ -85,9 +100,10 @@ div#chat-room-header {
     }
 }
 
-div#messages {
+div#messages, div#lobby {
     flex: 1 1 auto;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 div.message {
@@ -96,29 +112,134 @@ div.message {
     margin: 1rem;
     border-radius: 1rem;
     width: 40rem;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.4) 5px 5px;
+    overflow: hidden;
+
+    &:hover {
+        z-index: 10;
+    }
+
+    p.message-text {
+        text-align: justify;
+    }
+
+    img.message-img {
+        width: 100%;
+        border-radius: 1rem;
+        border: 2px solid white;
+        margin-bottom: 1rem;
+    }
+
+    div.message-likes {
+        background: white;
+        border-radius: 5px;
+        padding: .5rem;
+        
+
+        i {
+            color: rgb(255, 95, 95);
+        }
+    }
 
     &.user-message {
-        background: rgb(194, 194, 194);
+        background: white;
         margin-right: 1rem;
         margin-left: auto;
+
+        div.message-likes {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgb(100, 175, 237);
+            color: white;
+        }
     }
     
     &.friend-message {
-        background: cornflowerblue;
+        background: rgb(100, 175, 237);
+        color: white;
+        div.message-likes {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: black;
+        }
     }
+
 }
 
 
 div#message-input-panel {
     padding: 2rem;
-    background: grey;
+    background: rgb(230, 230, 230);
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
+    position: relative;
+
+    // &.hidden {
+    //     transform: translateY(85%);
+    // }
+
+    // i#expand-btn {
+    //     position: absolute;
+    //     top: 0;
+    //     left: 1rem;
+    //     padding: 1rem;
+    //     background: rgb(206, 206, 206);
+    //     color: white;
+    //     border-radius: 50%;
+    //     transform: translateY(-80%);
+    //     box-shadow: rgba(0, 0, 0, 0.3) 3px 3px;
+    // }
+
+    input::-webkit-file-upload-button {
+        display: inline;
+        margin-top: 1rem;
+        margin-right: 1rem;
+        width: 8rem;
+        transition: all 0.3s ease;
+        background: white;
+        padding: .25rem .5rem .25rem .5rem;
+        border-radius: 5px;
+        color: black;
+        border: none;
+
+        &:hover, &:focus {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
 
     textarea {
         padding: 1rem;
+        width: 40rem;
+        margin-right: 4rem;
     }
 
     button {
         width: 5rem;
         height: 3rem;
+        margin: auto;
+    }
+}
+
+div#dark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    opacity: 0;
+    pointer-events: none;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
     }
 }

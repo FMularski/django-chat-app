@@ -18,7 +18,6 @@ class UserProfile(models.Model):
     email = models.EmailField(null=False)
     profile_img = models.ImageField(null=True, blank=True)
     friends = models.ManyToManyField('UserProfile', related_name='profiles_with_this_in_friends', blank=True)
-    # friend = models.ForeignKey('UserProfile', related_name='friends', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
@@ -31,6 +30,21 @@ class Invitation(models.Model):
 
     def __str__(self):
         return f'from {self.send_by.username} to {self.send_to.username}'
+
+
+class Room(models.Model):
+    name = models.CharField(max_length=100)
+    last_message_at = models.DateTimeField()
+    members = models.ManyToManyField(UserProfile, blank=True)
+
+
+class Message(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(null=True, blank=True)
+    attached_img = models.ImageField(null=True, blank=True)
+    likes = models.PositiveSmallIntegerField(default=0)
+    sender = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
 
 @receiver(post_save, sender=User)

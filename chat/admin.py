@@ -17,3 +17,15 @@ class InvitationAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(models.Invitation, InvitationAdmin)
+
+
+class RoomAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(models.Room, RoomAdmin)
+
+
+class MessageAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(models.Message, MessageAdmin)

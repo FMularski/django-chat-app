@@ -63,6 +63,19 @@ div.chat-room-record:hover {
   color: white;
 }
 
+a#back {
+  text-align: center;
+  padding: 1rem;
+  background: #d4d4d4;
+  text-decoration: none;
+  color: white;
+}
+
+a#back i {
+  -webkit-animation: back-btn 1s linear infinite;
+          animation: back-btn 1s linear infinite;
+}
+
 img.user-portrait {
   width: 3rem;
   border-radius: 50%;
@@ -89,9 +102,13 @@ div#chat-room-content {
 }
 
 div#chat-room-header {
-  background: gray;
+  background: #e6e6e6;
   padding: 2rem;
   color: white;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
+          box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
 }
 
 div#chat-room-header b {
@@ -103,11 +120,12 @@ div#chat-room-header i {
   font-size: 2rem;
 }
 
-div#messages {
+div#messages, div#lobby {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 div.message {
@@ -115,29 +133,121 @@ div.message {
   margin: 1rem;
   border-radius: 1rem;
   width: 40rem;
+  position: relative;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 5px 5px;
+          box-shadow: rgba(0, 0, 0, 0.4) 5px 5px;
+  overflow: hidden;
+}
+
+div.message:hover {
+  z-index: 10;
+}
+
+div.message p.message-text {
+  text-align: justify;
+}
+
+div.message img.message-img {
+  width: 100%;
+  border-radius: 1rem;
+  border: 2px solid white;
+  margin-bottom: 1rem;
+}
+
+div.message div.message-likes {
+  background: white;
+  border-radius: 5px;
+  padding: .5rem;
+}
+
+div.message div.message-likes i {
+  color: #ff5f5f;
 }
 
 div.message.user-message {
-  background: #c2c2c2;
+  background: white;
   margin-right: 1rem;
   margin-left: auto;
 }
 
+div.message.user-message div.message-likes {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #64afed;
+  color: white;
+}
+
 div.message.friend-message {
-  background: cornflowerblue;
+  background: #64afed;
+  color: white;
+}
+
+div.message.friend-message div.message-likes {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: black;
 }
 
 div#message-input-panel {
   padding: 2rem;
-  background: grey;
+  background: #e6e6e6;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
+          box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
+  position: relative;
+}
+
+div#message-input-panel input::-webkit-file-upload-button {
+  display: inline;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  width: 8rem;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  background: white;
+  padding: .25rem .5rem .25rem .5rem;
+  border-radius: 5px;
+  color: black;
+  border: none;
+}
+
+div#message-input-panel input::-webkit-file-upload-button:hover, div#message-input-panel input::-webkit-file-upload-button:focus {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  cursor: pointer;
 }
 
 div#message-input-panel textarea {
   padding: 1rem;
+  width: 40rem;
+  margin-right: 4rem;
 }
 
 div#message-input-panel button {
   width: 5rem;
   height: 3rem;
+  margin: auto;
+}
+
+div#dark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+div#dark.active {
+  opacity: 1;
+  pointer-events: all;
 }
 /*# sourceMappingURL=chat_rooms.css.map */

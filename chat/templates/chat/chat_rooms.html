@@ -43,69 +43,75 @@
 
                 
             </div>
+            <a href="{% url 'index' %}" class="transition-activator hover-scale" id="back"><i class="fas fa-arrow-left"></i> Return</a>
         </div>
         <div id="chat-room-content">
-            <div id="chat-room-header" class="flex-between">
-                <span><b>chat name</b> username1, username2, username3</span>
-                <i class="fas fa-door-open hover-scale"></i>
+            <div id="lobby">
+                {% include 'chat/flying_messages.html' %}
             </div>
-            <div id="messages">
-                <div class="message user-message">
-                    <p>
-                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
-                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+
+            {% if room.id %}
+                <div id="chat-room-header" class="flex-between">
+                    <span><b>chat name</b> username1, username2, username3</span>
+                    <i class="fas fa-door-open hover-scale"></i>
+                </div>
+                
+                <div id="messages">
+
+                    <div class="message user-message hover-scale">
+                        <p>
+                            <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                            <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        </p>
+                        <hr>
+                        <p class="message-text">message text</p>
+                        <img class="message-img" src="https://static.standard.co.uk/2021/06/07/12/erik-jan-leusink-IbPxGLgJiMI-unsplash.jpg?width=968&auto=webp&quality=75&crop=968%3A645%2Csmart" alt="">
+                        <div class="message-likes">
+                            <i class="fas fa-heart"></i>
+                            <span class="likes-count">1</span>
+                        </div>
+                    </div>
+
+                    <div class="message friend-message hover-scale">
+                        <p>
+                            <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                            <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        </p>
                         <hr>
                         <p>message text</p>
-                    </p>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvMTNIBTPu8SgnnHjcLIrJmz06dRdpfzmQSA&usqp=CAU" alt="" class="message-img">
+                        <div class="message-likes">
+                            <i class="fas fa-heart"></i>
+                            <span class="likes-count">1</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="message friend-message">
-                    <p>
-                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
-                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
-                        <hr>
-                        <p>message text</p>
-                    </p>
+
+                <div id="message-input-panel" class="flex-evenly hidden">
+                    <input id="msg-file" name="msg-file" type="file">
+                    <textarea name="msg-text" id="" cols="100" rows="2" class="form-control w-75"></textarea>
+                    <button class="hover-scale btn btn-outline-primary"><i class="fas fa-paper-plane"></i></button>
                 </div>
-                <div class="message friend-message">
-                    <p>
-                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
-                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
-                        <hr>
-                        <p>message text</p>
-                    </p>
-                </div>
-                <div class="message user-message">
-                    <p>
-                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
-                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
-                        <hr>
-                        <p>message text</p>
-                    </p>
-                </div>
-                <div class="message friend-message">
-                    <p>
-                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
-                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
-                        <hr>
-                        <p>message text</p>
-                    </p>
-                </div>
-                <div class="message friend-message">
-                    <p>
-                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
-                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
-                        <hr>
-                        <p>message text</p>
-                    </p>
-                </div>
-            </div>
-            <div id="message-input-panel" class="flex-evenly">
-                <input type="file">
-                <textarea name="" id="" cols="120" rows="2"></textarea>
-                <button class="hover-scale btn btn-outline-light"><i class="fas fa-paper-plane"></i></button>
-            </div>
+            {% endif %}
         </div>
     </main>
+
+    <div id="dark" class=""></div>
+    <div id="create-room-panel">
+        <h2>Create Room</h2>
+        <form action="">
+            {% csrf_token %}
+            {{form}}
+        </form>
+    </div>
+
+
 {% endblock %}
 {% block script %}
+    <script>
+        (function(){
+            const messages = document.querySelector('#messages');
+            messages.scrollTop = messages.scrollHeight;
+        })();
+    </script>
 {% endblock %}
