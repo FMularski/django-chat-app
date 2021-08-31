@@ -1,0 +1,111 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+{% block link %}
+    <link rel="stylesheet" href="{% static '/chat/css/chat_rooms.css' %} ">
+{% endblock %}
+{% block title %} | Chat Rooms {% endblock %}
+{% block main %}
+    <main class="flex-start">
+        <div id="chat-room-list-and-filter">
+            <div id="filter-input-container">
+                <input type="text" id="filter-input" placeholder="Filter..." class="form-control hover-scale">
+            </div>
+            <div id="chat-room-list">
+                <i id="add-chat-room-btn" class="fas fa-plus hover-scale"></i>
+                
+                <a href="#" class="chat-room-record-a">
+                    <div class="chat-room-record">
+                        <p class="chat-room-record-name"><b>chat name</b> <span class="chat-room-record-users-count">(0 users)</span></p>
+                        <div class="chat-preview flex-start">
+                            <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}"/>
+                            <div class="flex-between-column">
+                                <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                                <span class="chat-room-record-message">message text</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="chat-room-record-a">
+                    <div class="chat-room-record">
+                        <p class="chat-room-record-name"><b>chat name</b> <span class="chat-room-record-users-count">(0 users)</span></p>
+                        <div class="chat-preview flex-start">
+                            <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}"/>
+                            <div class="flex-between-column">
+                                <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                                <span class="chat-room-record-message">message text</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                
+
+                
+            </div>
+        </div>
+        <div id="chat-room-content">
+            <div id="chat-room-header" class="flex-between">
+                <span><b>chat name</b> username1, username2, username3</span>
+                <i class="fas fa-door-open hover-scale"></i>
+            </div>
+            <div id="messages">
+                <div class="message user-message">
+                    <p>
+                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        <hr>
+                        <p>message text</p>
+                    </p>
+                </div>
+                <div class="message friend-message">
+                    <p>
+                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        <hr>
+                        <p>message text</p>
+                    </p>
+                </div>
+                <div class="message friend-message">
+                    <p>
+                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        <hr>
+                        <p>message text</p>
+                    </p>
+                </div>
+                <div class="message user-message">
+                    <p>
+                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        <hr>
+                        <p>message text</p>
+                    </p>
+                </div>
+                <div class="message friend-message">
+                    <p>
+                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        <hr>
+                        <p>message text</p>
+                    </p>
+                </div>
+                <div class="message friend-message">
+                    <p>
+                        <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
+                        <span class="chat-room-record-username"><b>username</b> <i>datetime</i></span>
+                        <hr>
+                        <p>message text</p>
+                    </p>
+                </div>
+            </div>
+            <div id="message-input-panel" class="flex-evenly">
+                <input type="file">
+                <textarea name="" id="" cols="120" rows="2"></textarea>
+                <button class="hover-scale btn btn-outline-light"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block script %}
+{% endblock %}

@@ -186,4 +186,4 @@ def filter_friends(request, input):
 @login_required(login_url='login')
 def chat_rooms(request):
     context = {}
-    return render(request, 'chat/chatrooms.html', context)
+    return render(request, 'chat/chat_rooms.html', context)

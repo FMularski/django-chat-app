@@ -45,6 +45,19 @@ body {
     align-items: center;
 }
 
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex-between-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 a#back-btn {
     color: white;
     position: absolute;
@@ -81,6 +94,28 @@ div.popup {
         background: rgba(0, 255, 21, 0.55);
     }
 }
+
+// scrollbar
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 4px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
 @keyframes popup-fade-out {
     0% {

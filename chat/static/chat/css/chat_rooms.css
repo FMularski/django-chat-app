@@ -1,0 +1,143 @@
+div#chat-room-list-and-filter {
+  width: 20vw;
+  background: rgba(199, 199, 199, 0.404);
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+div#filter-input-container {
+  padding: 1rem 2rem 1rem 2rem;
+  background: #d4d4d4;
+}
+
+div#filter-input-container input {
+  width: 90%;
+  margin: auto;
+}
+
+div#chat-room-list {
+  position: relative;
+  overflow-y: auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+div#chat-room-list i#add-chat-room-btn {
+  top: 1rem;
+  right: 1rem;
+  position: absolute;
+  padding: .5rem .6rem .5rem .6rem;
+  border-radius: .5rem;
+  background: #d4d4d4;
+  color: white;
+}
+
+a.chat-room-record-a {
+  text-decoration: none;
+  color: black;
+}
+
+div.chat-room-record {
+  background: white;
+  padding: 1rem;
+  border-bottom: 1px solid #d4d4d4;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+div.chat-room-record:hover {
+  background: cornflowerblue;
+  color: white;
+}
+
+img.user-portrait {
+  width: 3rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid white;
+}
+
+div#chat-room-content {
+  width: 80vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+div#chat-room-header {
+  background: gray;
+  padding: 2rem;
+  color: white;
+}
+
+div#chat-room-header b {
+  font-size: 1.6rem;
+  margin-right: 1rem;
+}
+
+div#chat-room-header i {
+  font-size: 2rem;
+}
+
+div#messages {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+div.message {
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  width: 40rem;
+}
+
+div.message.user-message {
+  background: #c2c2c2;
+  margin-right: 1rem;
+  margin-left: auto;
+}
+
+div.message.friend-message {
+  background: cornflowerblue;
+}
+
+div#message-input-panel {
+  padding: 2rem;
+  background: grey;
+}
+
+div#message-input-panel textarea {
+  padding: 1rem;
+}
+
+div#message-input-panel button {
+  width: 5rem;
+  height: 3rem;
+}
+/*# sourceMappingURL=chat_rooms.css.map */
