@@ -6,7 +6,6 @@
     searchInput.addEventListener('keyup', function() {
 
         if(!searchInput.value) {
-            spinner.innerHTML = '';
             resultsBox.innerHTML = '';
             return;
         } 
@@ -14,7 +13,7 @@
         spinner.innerHTML = '<i class="fas fa-spinner spinning"></i>';
         
         $.ajax({
-            url: '/ajax/search/' + searchInput.value,
+            url: '/ajax/search/' + (searchInput.value ? searchInput.value + '/' : ''),
             method: 'GET',
             dataType: 'json',
             success: function(response) {

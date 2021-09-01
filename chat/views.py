@@ -77,7 +77,7 @@ def friends(request):
 
 
 @login_required(login_url='login')
-def search(request, input):
+def search(request, input=''):
     if request.is_ajax():
         search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img') \
         .filter(username__istartswith=input) \
@@ -169,7 +169,7 @@ def delete_friend(request, pk):
 
 
 @login_required(login_url='login')
-def filter_friends(request, input):
+def filter_friends(request, input=''):
     if request.is_ajax():
         filtered_out = list(request.user.profile.friends.filter(~Q(username__istartswith=input)).values('pk'))
         

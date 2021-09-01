@@ -1,22 +1,15 @@
 (function(){
     const filterInput = document.querySelector('#filter-input');
     const filterSpinner = document.querySelector('#filter-spinner');
+    const friendRecords = document.querySelectorAll('.friend-record');
+
 
     filterInput.addEventListener('keyup', function(){
-
-        if(!filterInput.value) {
-            const friendRecords = document.querySelectorAll('.friend-record');
-            friendRecords.forEach(function(record){
-                record.classList.remove('hidden');
-            })
-            filterSpinner.innerHTML = '';
-            return;
-        } 
 
         filterSpinner.innerHTML = '<i class="fas fa-spinner spinning"></i>';
 
         $.ajax({
-            url: '/ajax/filter/' + filterInput.value + '/',
+            url: '/ajax/filter/' + (filterInput.value ? filterInput.value  + '/' : ''),
             method: 'GET',
             dataType: 'json',
             success: function(response) {
