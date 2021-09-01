@@ -218,9 +218,13 @@ def create_room(request):
     return HttpResponseNotFound()
 
 
-# @login_required(login_url='login')
-# def room(request, pk):
-#     room = models.Room.objects.get(pk=pk)
+@login_required(login_url='login')
+def filter_rooms(request, input=''):
+    if request.is_ajax():
+        filtered_out = list(request.user.profile.room_set.filter(~Q(name__istartswith=input)).values('pk'))
+        
+        filtered_out_ids = [dictionary.get('pk') for dictionary in filtered_out]    
 
-#     context = {'room': room}
-#     return render(request, 'chat/chat_rooms.html', context)
+        return JsonResponse(data={'idsToHide': filtered_out_ids})
+    return HttpResponseNotFound()
+

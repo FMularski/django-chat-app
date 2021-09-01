@@ -28,14 +28,19 @@ urlpatterns = [
     path('edit/', views.edit, name='edit'),
 
     path('friends/', views.friends, name='friends'),
-    path('ajax/search/<str:input>/', views.search, name='search'),
+
     path('ajax/invite/<int:pk>/', views.invite_friend, name='invite'),
     path('ajax/decline/<int:pk>/', views.decline_invitation, name='decline'),
     path('ajax/accept/<int:pk>/', views.accept_invitation, name='accept'),
     path('ajax/delete_friend/<int:pk>/', views.delete_friend, name='delete_friend'),
+    
+    path('ajax/search/<str:input>/', views.search, name='search'),
     path('ajax/filter/<str:input>/', views.filter_friends, name='filter_friends'),
 
     path('chat_rooms/', views.chat_rooms, name='chat_rooms'),
     path('chat_rooms/<int:pk>/', views.chat_rooms, name='chat_rooms'),
     path('create_room/', views.create_room, name='create_room'),
+
+    path('ajax/filter_rooms/', views.filter_rooms, name='filter_rooms'),
+    path('ajax/filter_rooms/<str:input>/', views.filter_rooms, name='filter_rooms'),
 ]

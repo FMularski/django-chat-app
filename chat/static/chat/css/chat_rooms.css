@@ -45,6 +45,19 @@ div#chat-room-list i#add-chat-room-btn {
   color: white;
 }
 
+div#chat-room-list div#filter-room-spinner {
+  position: absolute;
+  top: 0.4rem;
+  left: 50%;
+  color: #d4d4d4;
+  font-size: 1.6rem;
+}
+
+div#chat-room-list div#filter-room-spinner i.spinning {
+  -webkit-animation: spin .75s ease infinite;
+          animation: spin .75s ease infinite;
+}
+
 a.chat-room-record-a {
   text-decoration: none;
   color: black;
@@ -61,6 +74,10 @@ div.chat-room-record {
 div.chat-room-record:hover {
   background: cornflowerblue;
   color: white;
+}
+
+div.chat-room-record.hidden {
+  display: none;
 }
 
 a#back {

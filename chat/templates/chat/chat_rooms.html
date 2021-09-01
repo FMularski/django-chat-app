@@ -8,14 +8,16 @@
     <main class="flex-start">
         <div id="chat-room-list-and-filter">
             <div id="filter-input-container">
-                <input type="text" id="filter-input" placeholder="Filter..." class="form-control hover-scale">
+                <input type="text" id="filter-room-input" placeholder="Filter..." class="form-control hover-scale">
             </div>
             <div id="chat-room-list">
+
                 <i id="add-chat-room-btn" class="fas fa-plus hover-scale"></i>
+                <div id="filter-room-spinner"></div>
 
                 {% for room in rooms %}
                     <a href="{% url 'chat_rooms' room.pk %}" class="chat-room-record-a transition-activator">
-                        <div class="chat-room-record">
+                        <div class="chat-room-record" id="room-record-{{room.pk}}">
                             <p class="chat-room-record-name"><b>{{room.name}}</b> <span class="chat-room-record-users-count">({{room.members.count}} users)</span></p>
                             <div class="chat-preview flex-start">
                                 {% if room.message_set.all.0.sender.profile_img %}
@@ -127,6 +129,7 @@
 {% block script %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static '/chat/js/create_room_form.js' %}"></script>
+    <script src="{% static '/chat/js/filter_rooms.js' %}"></script>
     <script>
         (function(){
             const messages = document.querySelector('#messages');

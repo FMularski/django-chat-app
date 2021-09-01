@@ -33,7 +33,20 @@ div#chat-room-list {
         background: rgb(212, 212, 212);
         color: white;
     }
+
+    div#filter-room-spinner {
+        position: absolute;
+        top: 0.4rem;
+        left: 50%;
+        color: rgb(212, 212, 212);
+        font-size: 1.6rem;
+        
+        i.spinning {
+            animation: spin .75s ease infinite;
+        }
+    }
 }
+
 
 a.chat-room-record-a {
     text-decoration: none;
@@ -49,6 +62,10 @@ div.chat-room-record {
     &:hover {
         background: cornflowerblue;
         color: white;
+    }
+
+    &.hidden {
+        display: none;
     }
 }
 
