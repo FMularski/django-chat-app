@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save, post_save
+import datetime
 
 
 class User(AbstractUser):
@@ -34,8 +35,14 @@ class Invitation(models.Model):
 
 class Room(models.Model):
     name = models.CharField(max_length=100)
-    last_message_at = models.DateTimeField()
+    last_message_at = models.DateTimeField(auto_now_add=True)
     members = models.ManyToManyField(UserProfile, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = '-last_message_at', 
 
 
 class Message(models.Model):
@@ -66,3 +73,9 @@ def user_profile_post_save_handler(instance, created, **kwargs):
         instance.user.last_name = instance.last_name
         instance.user.email = instance.email
         instance.user.save()
+
+
+@receiver(pre_save, sender=Message)
+def message_pre_save_handler(instance, **kwargs):
+    instance.room.last_message_at = datetime.datetime.now()
+    instance.room.save()

@@ -36,4 +36,6 @@ urlpatterns = [
     path('ajax/filter/<str:input>/', views.filter_friends, name='filter_friends'),
 
     path('chat_rooms/', views.chat_rooms, name='chat_rooms'),
+    path('chat_rooms/<int:pk>/', views.chat_rooms, name='chat_rooms'),
+    path('create_room/', views.create_room, name='create_room'),
 ]

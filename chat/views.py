@@ -180,9 +180,47 @@ def filter_friends(request, input):
 
 
 @login_required(login_url='login')
-def chat_rooms(request):
+def chat_rooms(request, pk=None):
+    all_rooms = request.user.profile.room_set \
+        .prefetch_related('message_set', 'message_set__sender') \
+        .prefetch_related('members') \
+        .all()
+
+    room = all_rooms.get(pk=pk) if pk else None
     friends = request.user.profile.friends.only('pk', 'username', 'profile_img')
+    
     form = forms.RoomForm()
 
-    context = {'form': form, 'room_friends': friends}
+    context = {'form': form, 'room': room, 'rooms': all_rooms, 'room_friends': friends}
     return render(request, 'chat/chat_rooms.html', context)
+
+
+@login_required(login_url='login')
+def create_room(request):
+    if request.method == 'POST':
+        form = forms.RoomForm(request.POST)
+        if form.is_valid():
+            room = models.Room()
+            room.name = form.cleaned_data.get('name')
+            room.save()
+
+            invited_friends = models.UserProfile.objects.filter(pk__in=request.POST.getlist('friends'))
+            room.members.add(request.user.profile, *invited_friends)
+
+            welcome_msg = models.Message()
+            welcome_msg.text = 'Hey! I have just created this room, let\'s chat!'
+            welcome_msg.sender = request.user.profile
+            welcome_msg.room = room
+            welcome_msg.save()
+
+            
+            return redirect(reverse('chat_rooms', kwargs={'pk': room.pk}))
+    return HttpResponseNotFound()
+
+
+# @login_required(login_url='login')
+# def room(request, pk):
+#     room = models.Room.objects.get(pk=pk)
+
+#     context = {'room': room}
+#     return render(request, 'chat/chat_rooms.html', context)
