@@ -35,12 +35,12 @@
                 {% endfor %}
 
             </div>
-            <a href="{% url 'index' %}" class="transition-activator hover-scale" id="back"><i class="fas fa-arrow-left"></i> Return</a>
+            <a href="{% url 'index' %}" class="transition-activator" id="back"><i class="fas fa-arrow-left hover-scale"></i> Return</a>
         </div>
 
         <div id="chat-room-content">
             {% if room %}
-                <div id="chat-room-header" class="flex-between">
+                <div id="chat-room-header" class="flex-between" room-pk="{{room.pk}}">
                     <span><b>{{room.name}}</b>
                         ({% for member in room.members.all %}
                             {{member.username}}
@@ -50,7 +50,7 @@
                 </div>
                 
                 <div id="messages">
-                    {% for message in room.message_set.all %}
+                    {% for message in room.message_set.all reversed %}
                         <div class="message hover-scale {% if message.sender.pk == user.profile.pk %} user-message {% else %} friend-message {% endif %}">
                             <p>
                                 {% if message.sender.profile_img %}
@@ -74,9 +74,10 @@
                 </div>
 
                 <div id="message-input-panel" class="flex-evenly hidden">
-                    <input id="msg-file" name="msg-file" type="file">
-                    <textarea name="msg-text" id="" cols="100" rows="2" class="form-control w-75"></textarea>
-                    <button class="hover-scale btn btn-outline-primary"><i class="fas fa-paper-plane"></i></button>
+                    {% csrf_token %}
+                    <input id="msg-img" name="msg-file" type="file">
+                    <textarea name="msg-text" id="msg-text" cols="100" rows="2" class="form-control w-75"></textarea>
+                    <button id="send-btn" class="hover-scale btn btn-dark"><i class="fas fa-paper-plane"></i></button>
                 </div>
             {% else %}
             <div id="lobby">
@@ -103,19 +104,23 @@
             </h2>
             <span class="btn btn-outline-dark hover-scale" id="uncheck-btn">Uncheck all</span>
             <div id="friends-selection">
-                {% for friend in room_friends %}
-                    <div class="form-check flex-start add-friend-record" id="add-friend-{{friend.pk}}">
-                        <input class="form-check-input hover-scale" type="checkbox" value="{{friend.pk}}" name="friends">
-                        <label class="form-check-label">
-                            {% if friend.profile_img %}
-                                <img src="{{friend.profile_img.url}}" class="user-portrait"/>
-                            {% else %}
-                                <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}" >
-                            {% endif %}
-                            {{friend.username}}
-                        </label>
-                    </div>
-                {% endfor %}
+                {% if room_friends %}
+                    {% for friend in room_friends %}
+                        <div class="form-check flex-start add-friend-record" id="add-friend-{{friend.pk}}">
+                            <input class="form-check-input hover-scale" type="checkbox" value="{{friend.pk}}" name="friends">
+                            <label class="form-check-label">
+                                {% if friend.profile_img %}
+                                    <img src="{{friend.profile_img.url}}" class="user-portrait"/>
+                                {% else %}
+                                    <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}" >
+                                {% endif %}
+                                {{friend.username}}
+                            </label>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No friends available.</p>
+                {% endif %}
             </div>
             <br>
             <input type="submit" value="Create" class="btn btn-outline-dark hover-scale">
@@ -130,6 +135,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static '/chat/js/create_room_form.js' %}"></script>
     <script src="{% static '/chat/js/filter_rooms.js' %}"></script>
+    <script src="{% static '/chat/js/send_message.js' %}"></script>
     <script>
         (function(){
             const messages = document.querySelector('#messages');

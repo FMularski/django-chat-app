@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
-import datetime
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -22,6 +22,9 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
+
+    class Meta:
+        ordering = 'username',
 
 
 class Invitation(models.Model):
@@ -53,6 +56,9 @@ class Message(models.Model):
     sender = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = '-created_at',
+
 
 @receiver(post_save, sender=User)
 def user_post_save_handler(instance, created, **kwargs):
@@ -77,5 +83,5 @@ def user_profile_post_save_handler(instance, created, **kwargs):
 
 @receiver(pre_save, sender=Message)
 def message_pre_save_handler(instance, **kwargs):
-    instance.room.last_message_at = datetime.datetime.now()
+    instance.room.last_message_at = timezone.now()
     instance.room.save()

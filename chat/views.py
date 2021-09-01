@@ -76,7 +76,6 @@ def friends(request):
     return render(request, 'chat/friends.html', context)
 
 
-@login_required(login_url='login')
 def search(request, input=''):
     if request.is_ajax():
         search_results = models.UserProfile.objects.only('pk', 'username', 'profile_img') \
@@ -102,7 +101,6 @@ def search(request, input=''):
     return HttpResponseNotFound()
 
 
-@login_required(login_url='login')
 def invite_friend(request, pk):
     if request.is_ajax():
         friend = models.UserProfile.objects.get(pk=pk)
@@ -117,7 +115,6 @@ def invite_friend(request, pk):
     return HttpResponseNotFound();
 
 
-@login_required(login_url='login')
 def accept_invitation(request, pk):
     if request.is_ajax():
         invitation = models.Invitation.objects.get(pk=pk)
@@ -144,7 +141,6 @@ def accept_invitation(request, pk):
     return HttpResponseNotFound();
 
 
-@login_required(login_url='login')
 def decline_invitation(request, pk):
     if request.is_ajax():
         invitation = models.Invitation.objects.get(pk=pk)
@@ -154,7 +150,6 @@ def decline_invitation(request, pk):
     return HttpResponseNotFound();
 
 
-@login_required(login_url='login')
 def delete_friend(request, pk):
     if request.is_ajax():
         friend_to_delete = models.UserProfile.objects.get(pk=pk)
@@ -168,7 +163,6 @@ def delete_friend(request, pk):
     return HttpResponseNotFound()
 
 
-@login_required(login_url='login')
 def filter_friends(request, input=''):
     if request.is_ajax():
         filtered_out = list(request.user.profile.friends.filter(~Q(username__istartswith=input)).values('pk'))
@@ -212,13 +206,14 @@ def create_room(request):
             welcome_msg.sender = request.user.profile
             welcome_msg.room = room
             welcome_msg.save()
-
             
             return redirect(reverse('chat_rooms', kwargs={'pk': room.pk}))
+        
+        messages.error(request, 'Error while creating a chat room.')
+        return redirect(reverse('chat_rooms', ))
     return HttpResponseNotFound()
 
 
-@login_required(login_url='login')
 def filter_rooms(request, input=''):
     if request.is_ajax():
         filtered_out = list(request.user.profile.room_set.filter(~Q(name__istartswith=input)).values('pk'))
@@ -226,5 +221,24 @@ def filter_rooms(request, input=''):
         filtered_out_ids = [dictionary.get('pk') for dictionary in filtered_out]    
 
         return JsonResponse(data={'idsToHide': filtered_out_ids})
+    return HttpResponseNotFound()
+
+
+def send_message(request):
+    if request.is_ajax():
+        message = models.Message()
+        message.text = request.POST.get('text')
+        message.sender = request.user.profile
+        message.room = models.Room.objects.get(pk=request.POST.get('room-pk'))
+        message.save()
+
+        return JsonResponse(data={
+            'pk': message.pk,
+            'text': message.text,
+            'senderUsername': message.sender.username,
+            'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img else '/static/chat/img/default_profile.png',
+            'createdAt': message.created_at
+        }, safe=False)
+
     return HttpResponseNotFound()
 
