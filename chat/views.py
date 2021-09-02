@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponseNotFound
+from django.utils import dateformat
 from . import models, forms
 
 
@@ -175,17 +176,24 @@ def filter_friends(request, input=''):
 
 @login_required(login_url='login')
 def chat_rooms(request, pk=None):
-    all_rooms = request.user.profile.room_set \
-        .prefetch_related('message_set', 'message_set__sender') \
-        .prefetch_related('members') \
-        .all()
+    # all_rooms = request.user.profile.room_set \
+    #     .prefetch_related('message_set', 'message_set__sender') \
+    #     .prefetch_related('members') \
+    #     .all()
 
-    room = all_rooms.get(pk=pk) if pk else None
+    room = models.Room.objects.get(pk=pk) if pk else None
+
+    room_data = {
+        'pk': room.pk,
+        'name': room.name,
+        'members': ', '.join([member.username for member in room.members.all()])
+    }
+
     friends = request.user.profile.friends.only('pk', 'username', 'profile_img')
     
     form = forms.RoomForm()
 
-    context = {'form': form, 'room': room, 'rooms': all_rooms, 'room_friends': friends}
+    context = {'form': form, 'room_data': room_data, 'room_friends': friends}
     return render(request, 'chat/chat_rooms.html', context)
 
 
@@ -237,8 +245,32 @@ def send_message(request):
             'text': message.text,
             'senderUsername': message.sender.username,
             'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img else '/static/chat/img/default_profile.png',
-            'createdAt': message.created_at
+            'createdAt': dateformat.format(message.created_at, 'd.m.Y, H:i')
         }, safe=False)
 
     return HttpResponseNotFound()
 
+
+def fetch_messages(request, room_pk):
+    if request.is_ajax():
+        messages_objs = models.Message.objects \
+            .select_related('sender', 'room') \
+            .filter(room__pk=room_pk) \
+            .order_by('created_at')
+        
+        messages = []
+        for message in messages_objs:
+            messages.append({
+                'createdAt': dateformat.format(message.created_at, 'd.m.Y, H:i'),
+                'text': message.text,
+                'cssClass': 'user-message' if message.sender.pk == request.user.pk else 'friend-message',
+                # 'attachedImg': message.attached_img,
+                'likes': message.likes,
+                'senderUsername': message.sender.username,
+                'senderPK': message.sender.pk,
+                'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img else '/static/chat/img/default_profile.png'
+            })
+
+        return JsonResponse(data={'messages': messages}, safe=False)
+
+    return HttpResponseNotFound()

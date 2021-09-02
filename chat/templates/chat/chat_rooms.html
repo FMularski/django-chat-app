@@ -15,7 +15,7 @@
                 <i id="add-chat-room-btn" class="fas fa-plus hover-scale"></i>
                 <div id="filter-room-spinner"></div>
 
-                {% for room in rooms %}
+                <!-- {% for room in rooms %}
                     <a href="{% url 'chat_rooms' room.pk %}" class="chat-room-record-a transition-activator">
                         <div class="chat-room-record" id="room-record-{{room.pk}}">
                             <p class="chat-room-record-name"><b>{{room.name}}</b> <span class="chat-room-record-users-count">({{room.members.count}} users)</span></p>
@@ -32,25 +32,26 @@
                             </div>
                         </div>
                     </a>
-                {% endfor %}
+                {% endfor %} -->
 
             </div>
             <a href="{% url 'index' %}" class="transition-activator" id="back"><i class="fas fa-arrow-left hover-scale"></i> Return</a>
         </div>
 
         <div id="chat-room-content">
-            {% if room %}
-                <div id="chat-room-header" class="flex-between" room-pk="{{room.pk}}">
-                    <span><b>{{room.name}}</b>
-                        ({% for member in room.members.all %}
+            {% if room_data %}
+                <div id="chat-room-header" class="flex-between" room-pk="{{room_data.pk}}">
+                    <span><b>{{room_data.name}}</b>
+                        {{room_data.members}}
+                        <!-- ({% for member in room.members.all %}
                             {{member.username}}
-                        {% endfor %})
+                        {% endfor %}) -->
                     </span>
                     <i class="fas fa-door-open hover-scale"></i>
                 </div>
                 
                 <div id="messages">
-                    {% for message in room.message_set.all reversed %}
+                    <!-- {% for message in room.message_set.all reversed %}
                         <div class="message hover-scale {% if message.sender.pk == user.profile.pk %} user-message {% else %} friend-message {% endif %}">
                             <p>
                                 {% if message.sender.profile_img %}
@@ -70,10 +71,11 @@
                                 <span class="likes-count">{{message.likes}}</span>
                             </div>
                         </div>
-                    {% endfor %} 
+                    {% endfor %}  -->
                 </div>
 
                 <div id="message-input-panel" class="flex-evenly hidden">
+                    <span id="new-msg-btn" class="hidden">New Message <i class="fas fa-arrow-circle-down"></i></span>
                     {% csrf_token %}
                     <input id="msg-img" name="msg-file" type="file">
                     <textarea name="msg-text" id="msg-text" cols="100" rows="2" class="form-control w-75"></textarea>
@@ -136,10 +138,7 @@
     <script src="{% static '/chat/js/create_room_form.js' %}"></script>
     <script src="{% static '/chat/js/filter_rooms.js' %}"></script>
     <script src="{% static '/chat/js/send_message.js' %}"></script>
-    <script>
-        (function(){
-            const messages = document.querySelector('#messages');
-            if (messages) messages.scrollTop = messages.scrollHeight;
-        })();
-    </script>
+    {% if room_data %}
+        <script src="{% static '/chat/js/fetch_messages.js' %}"></script>
+    {% endif %}
 {% endblock %}

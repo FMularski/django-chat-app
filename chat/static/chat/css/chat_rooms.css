@@ -185,11 +185,6 @@ div.message.user-message {
   margin-left: auto;
 }
 
-div.message.user-message.new-msg:last-child {
-  -webkit-animation: msg-user-slide .5s ease;
-          animation: msg-user-slide .5s ease;
-}
-
 div.message.user-message div.message-likes {
   position: absolute;
   bottom: 0;
@@ -220,6 +215,33 @@ div#message-input-panel {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
           box-shadow: rgba(0, 0, 0, 0.3) 5px 5px;
   position: relative;
+}
+
+div#message-input-panel span#new-msg-btn {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  background: #64afed;
+  border-radius: 10px;
+  border: 1px solid white;
+  color: white;
+  z-index: 11;
+  -webkit-animation: new-msg-btn 5s ease infinite;
+          animation: new-msg-btn 5s ease infinite;
+}
+
+div#message-input-panel span#new-msg-btn:hover {
+  background: #90c7f5;
+  cursor: pointer;
+}
+
+div#message-input-panel span#new-msg-btn.hidden {
+  display: none;
 }
 
 div#message-input-panel input::-webkit-file-upload-button {
@@ -350,21 +372,57 @@ div#create-room-panel input[type="submit"] {
   }
 }
 
-@-webkit-keyframes msg-user-slide {
-  from {
-    margin-right: -100%;
+@-webkit-keyframes new-msg-btn {
+  0% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
   }
-  to {
-    margin-right: 1%;
+  2% {
+    -webkit-transform: translateX(-50%) translateY(-12px);
+            transform: translateX(-50%) translateY(-12px);
+  }
+  4% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  6% {
+    -webkit-transform: translateX(-50%) translateY(-8px);
+            transform: translateX(-50%) translateY(-8px);
+  }
+  8% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  100% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
   }
 }
 
-@keyframes msg-user-slide {
-  from {
-    margin-right: -100%;
+@keyframes new-msg-btn {
+  0% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
   }
-  to {
-    margin-right: 1%;
+  2% {
+    -webkit-transform: translateX(-50%) translateY(-12px);
+            transform: translateX(-50%) translateY(-12px);
+  }
+  4% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  6% {
+    -webkit-transform: translateX(-50%) translateY(-8px);
+            transform: translateX(-50%) translateY(-8px);
+  }
+  8% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  100% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
   }
 }
 

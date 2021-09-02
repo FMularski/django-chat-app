@@ -59,6 +59,9 @@ class Message(models.Model):
     class Meta:
         ordering = '-created_at',
 
+    def __str__(self):
+        return self.text
+
 
 @receiver(post_save, sender=User)
 def user_post_save_handler(instance, created, **kwargs):
