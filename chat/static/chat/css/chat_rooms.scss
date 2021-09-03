@@ -109,21 +109,35 @@ div#chat-room-content {
 }
 
 div#chat-room-header {
-    // background: rgb(230, 230, 230);
-    // background: rgb(140, 176, 255);
     background: rgba(0, 0, 0, 0.329);
     padding: 1rem 2rem 1rem 2rem;
     color: white;
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
 
+    position: relative;
+
     b {
         font-size: 1.6rem;
         margin-right: 1rem;
     }
 
-    i {
+    i#leave-room-btn {
+        position: absolute;
+        right: 1rem;
         font-size: 2rem;
+    }
+
+    div#fetch-msg-spinner {
+        position: absolute;
+        top: 110%;
+        left: 50%;
+        transform: translateX(50%);
+        font-size: 1.6rem;
+
+        i.spinning {
+            animation: spin .75s ease infinite;
+        }
     }
 }
 

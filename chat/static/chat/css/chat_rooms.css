@@ -129,6 +129,7 @@ div#chat-room-header {
   color: white;
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
+  position: relative;
 }
 
 div#chat-room-header b {
@@ -136,8 +137,24 @@ div#chat-room-header b {
   margin-right: 1rem;
 }
 
-div#chat-room-header i {
+div#chat-room-header i#leave-room-btn {
+  position: absolute;
+  right: 1rem;
   font-size: 2rem;
+}
+
+div#chat-room-header div#fetch-msg-spinner {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
+  font-size: 1.6rem;
+}
+
+div#chat-room-header div#fetch-msg-spinner i.spinning {
+  -webkit-animation: spin .75s ease infinite;
+          animation: spin .75s ease infinite;
 }
 
 div#messages, div#lobby {

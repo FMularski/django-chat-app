@@ -15,7 +15,7 @@
 
                 response.rooms.forEach(function(room) {
 
-                    const showAfterFilter = room.name.startsWith(filterInput.value);
+                    const showAfterFilter = filterInput.value ? room.name.startsWith(filterInput.value) : true;
 
                     rooms.innerHTML += 
                     '<a href="/chat_rooms/' + room.pk + '" class="chat-room-record-a transition-activator ' + (showAfterFilter ? '' : 'hidden') + '">' + 

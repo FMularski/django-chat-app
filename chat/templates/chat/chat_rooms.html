@@ -17,25 +17,6 @@
 
                 <div id="rooms-list"></div>
 
-                <!-- {% for room in rooms %}
-                    <a href="{% url 'chat_rooms' room.pk %}" class="chat-room-record-a transition-activator">
-                        <div class="chat-room-record" id="room-record-{{room.pk}}">
-                            <p class="chat-room-record-name"><b>{{room.name}}</b> <span class="chat-room-record-users-count">({{room.members.count}} users)</span></p>
-                            <div class="chat-preview flex-start">
-                                {% if room.message_set.all.0.sender.profile_img %}
-                                    <img src="{{room.message_set.all.0.sender.profile_img.url}}" class="user-portrait">
-                                {% else %}
-                                    <img class="user-portrait" src="{% static '/chat/img/default_profile.png' %}"/>
-                                {% endif %}
-                                <div class="flex-between-column">
-                                    <span class="chat-room-record-username"><b>{{room.message_set.all.0.sender.username}}</b> <i>{{room.message_set.all.0.created_at}}</i></span>
-                                    <span class="chat-room-record-message">{{room.message_set.all.0.text|slice:"0:25"}}...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                {% endfor %} -->
-
             </div>
             <a href="{% url 'index' %}" class="transition-activator" id="back"><i class="fas fa-arrow-left hover-scale"></i> Return</a>
         </div>
@@ -43,38 +24,12 @@
         <div id="chat-room-content">
             {% if room_data %}
                 <div id="chat-room-header" class="flex-between" room-pk="{{room_data.pk}}">
-                    <span><b>{{room_data.name}}</b>
-                        {{room_data.members}}
-                        <!-- ({% for member in room.members.all %}
-                            {{member.username}}
-                        {% endfor %}) -->
-                    </span>
-                    <i class="fas fa-door-open hover-scale"></i>
+                    <span><b>{{room_data.name}}</b>{{room_data.members}}</span>
+                    <i class="fas fa-door-open hover-scale" id="leave-room-btn"></i>
+                    <div id="fetch-msg-spinner"></div>
                 </div>
                 
-                <div id="messages">
-                    <!-- {% for message in room.message_set.all reversed %}
-                        <div class="message hover-scale {% if message.sender.pk == user.profile.pk %} user-message {% else %} friend-message {% endif %}">
-                            <p>
-                                {% if message.sender.profile_img %}
-                                    <img src="{{message.sender.profile_img.url}}" class="user-portrait">
-                                {% else %}
-                                    <img src="{% static '/chat/img/default_profile.png' %}" class="user-portrait">
-                                {% endif %}
-                                <span class="chat-room-record-username"><b>{{message.sender.username}}</b> <i>{{message.created_at}}</i></span>
-                            </p>
-                            <hr>
-                            <p class="message-text">{{message.text}}</p>
-                            {% if message.attached_img %}
-                                <img class="message-img" src="{{message.attached_img.url}}" alt="">
-                            {% endif %}
-                            <div class="message-likes">
-                                <i class="fas fa-heart"></i>
-                                <span class="likes-count">{{message.likes}}</span>
-                            </div>
-                        </div>
-                    {% endfor %}  -->
-                </div>
+                <div id="messages"></div>
 
                 <div id="message-input-panel" class="flex-evenly hidden">
                     <span id="new-msg-btn" class="hidden">New Message <i class="fas fa-arrow-circle-down"></i></span>

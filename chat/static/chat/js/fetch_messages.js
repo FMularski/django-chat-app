@@ -2,6 +2,10 @@
     const messagesBox = document.querySelector('#messages');
     const roomPK = document.querySelector('#chat-room-header').getAttribute('room-pk');
     const newMsgBtn = document.querySelector('#new-msg-btn');
+    const spinner = document.querySelector('#fetch-msg-spinner');
+    spinner.innerHTML = '<i class="fas fa-spinner spinning"></i>';
+
+
     newMsgBtn.addEventListener('click', function(){
         $('#messages').animate({ scrollTop: messages.scrollHeight}, 'slow');
         newMsgBtn.classList.add('hidden');
@@ -17,6 +21,7 @@
             dataType: 'json',
             success: function(response) {
                 messagesBox.innerHTML = ''
+                spinner.innerHTML = ''
 
                 response.messages.forEach(function(message) {
                     messagesBox.innerHTML += 
