@@ -1,5 +1,5 @@
 from django.db.utils import Error
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib import messages
@@ -176,18 +176,26 @@ def filter_friends(request, input=''):
 
 @login_required(login_url='login')
 def chat_rooms(request, pk=None):
-    # all_rooms = request.user.profile.room_set \
-    #     .prefetch_related('message_set', 'message_set__sender') \
-    #     .prefetch_related('members') \
-    #     .all()
+    # room = models.Room.objects.get(pk=pk) if pk else None
+    room = get_object_or_404(models.Room, pk=pk) if pk else None
+    members = None
 
-    room = models.Room.objects.get(pk=pk) if pk else None
+    ''' 
+        If room exists, get members and check if user is one of them.
+        If not, don't allow to enter 
+
+    '''
+    if room:
+        members = room.members.all()
+
+        if request.user.profile not in members:
+            return HttpResponseNotFound()
 
     room_data = {
         'pk': room.pk,
         'name': room.name,
-        'members': ', '.join([member.username for member in room.members.all()])
-    }
+        'members': ', '.join([member.username for member in members])
+    } if room else None
 
     friends = request.user.profile.friends.only('pk', 'username', 'profile_img')
     
