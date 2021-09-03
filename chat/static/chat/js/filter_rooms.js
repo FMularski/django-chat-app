@@ -1,6 +1,6 @@
 (function(){
+
     const filterInput = document.querySelector('#filter-room-input');
-    const rooms = document.querySelectorAll('.chat-room-record');
     const spinner = document.querySelector('#filter-room-spinner');
 
     filterInput.addEventListener('keyup', function(){
@@ -12,6 +12,7 @@
             method: 'GET',
             dataType: 'json',
             success: function(response) {
+                const rooms = document.querySelectorAll('.chat-room-record');
                 rooms.forEach(function(record){
                     if (response.idsToHide.includes(parseInt(record.getAttribute('id').split('-')[2]))) {
                         record.classList.add('hidden');
@@ -25,6 +26,6 @@
         })
 
 
+    });
 
-    })
 })();

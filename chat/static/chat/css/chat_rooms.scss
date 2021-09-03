@@ -53,6 +53,10 @@ div#chat-room-list {
 a.chat-room-record-a {
     text-decoration: none;
     color: black;
+
+    &.hidden {
+        display: none;
+    }
 }
 
 div.chat-room-record {

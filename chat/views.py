@@ -282,3 +282,28 @@ def fetch_messages(request, room_pk):
         return JsonResponse(data={'messages': messages}, safe=False)
 
     return HttpResponseNotFound()
+
+
+def fetch_rooms(request):
+    if request.is_ajax():
+        rooms_obj = request.user.profile.room_set.all()
+        
+        rooms = []
+        for room in rooms_obj:
+
+            last_message =  room.message_set.first()
+            last_message_sender = last_message.sender
+
+            rooms.append({
+                'pk': room.pk,
+                'name': room.name,
+                'members': room.members.count(),
+                'lastMsgAt': dateformat.format(last_message.created_at, 'd.m.Y, H:i'),
+                'lastMsgText': last_message.text[:25] + '...',
+                'senderProfileImg': last_message_sender.profile_img.url if last_message.sender.profile_img else '/static/chat/img/default_profile.png',
+                'senderUsername': last_message_sender.username
+            })
+
+        return JsonResponse(data={'rooms': rooms}, safe=False)
+    
+    return HttpResponseNotFound()

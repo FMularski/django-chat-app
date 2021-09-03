@@ -63,6 +63,10 @@ a.chat-room-record-a {
   color: black;
 }
 
+a.chat-room-record-a.hidden {
+  display: none;
+}
+
 div.chat-room-record {
   background: white;
   padding: 1rem;

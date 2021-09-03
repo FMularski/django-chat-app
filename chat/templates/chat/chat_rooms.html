@@ -15,6 +15,8 @@
                 <i id="add-chat-room-btn" class="fas fa-plus hover-scale"></i>
                 <div id="filter-room-spinner"></div>
 
+                <div id="rooms-list"></div>
+
                 <!-- {% for room in rooms %}
                     <a href="{% url 'chat_rooms' room.pk %}" class="chat-room-record-a transition-activator">
                         <div class="chat-room-record" id="room-record-{{room.pk}}">
@@ -137,8 +139,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static '/chat/js/create_room_form.js' %}"></script>
     <script src="{% static '/chat/js/filter_rooms.js' %}"></script>
-    <script src="{% static '/chat/js/send_message.js' %}"></script>
+    <script src="{% static '/chat/js/fetch_rooms.js' %}"></script>
     {% if room_data %}
+        <script src="{% static '/chat/js/send_message.js' %}"></script>
         <script src="{% static '/chat/js/fetch_messages.js' %}"></script>
     {% endif %}
 {% endblock %}
