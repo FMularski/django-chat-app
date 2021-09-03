@@ -85,6 +85,18 @@
             <input type="submit" value="Create" class="btn btn-outline-dark hover-scale">
         </form>
     </div>
+
+    {% if room_data %}
+        <div id="leave-room-panel">
+            <h2>Leave room</h2>
+            <p>Are you sure you want to leave this room?</p>
+            <form action="{% url 'leave_room' room_data.pk %}" method="POST" class="transition-activator">
+                {% csrf_token %}
+                <input type="submit" value="Yes" class="btn btn-outline-dark">
+            </form>
+            <button id="cancel-leave-btn" class="btn btn-outline-dark">No</button>
+        </div>
+    {% endif %}
     
     {% include 'chat/transition-in.html' %}
     {% include 'chat/transition-out.html' %}
@@ -98,5 +110,6 @@
     {% if room_data %}
         <script src="{% static '/chat/js/send_message.js' %}"></script>
         <script src="{% static '/chat/js/fetch_messages.js' %}"></script>
+        <script src="{% static '/chat/js/leave_room.js' %}"></script>
     {% endif %}
 {% endblock %}

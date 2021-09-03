@@ -218,7 +218,7 @@ def create_room(request):
             room.members.add(request.user.profile, *invited_friends)
 
             welcome_msg = models.Message()
-            welcome_msg.text = 'Hey! I have just created this room, let\'s chat!'
+            welcome_msg.text = f'[System] {request.user.username} has created room \'{room.name}\'.'
             welcome_msg.sender = request.user.profile
             welcome_msg.room = room
             welcome_msg.save()
@@ -306,4 +306,24 @@ def fetch_rooms(request):
 
         return JsonResponse(data={'rooms': rooms}, safe=False)
     
+    return HttpResponseNotFound()
+
+
+def leave_room(request, pk):
+    if request.method == 'POST':
+        room = models.Room.objects.prefetch_related('members').get(pk=pk)
+
+        goodbye_msg = models.Message()
+        goodbye_msg.text = f'[System] {request.user.username} has left the room.'
+        goodbye_msg.sender = request.user.profile
+        goodbye_msg.room = room
+        goodbye_msg.save()
+
+        room.members.remove(request.user.profile)
+        messages.success(request, f'You have left \'{room.name}\'.')
+        
+        if not room.members.count():
+            room.delete()
+        return redirect(reverse('chat_rooms',)) 
+
     return HttpResponseNotFound()

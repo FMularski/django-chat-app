@@ -292,7 +292,7 @@ div#dark {
     min-height: 100vh;
     background: rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 12;
 
     opacity: 0;
     pointer-events: none;
@@ -310,7 +310,7 @@ div#create-room-panel {
     border-radius: 3rem;
     box-shadow: rgba(0, 0, 0, .4) 1rem 1rem;
     transition: all 0.3s ease;
-    z-index: 11;
+    z-index: 12;
 
     position: fixed;
     top: -100%;
@@ -355,6 +355,29 @@ div#create-room-panel {
         width: 50%;
         display: block;
         margin: auto;
+    }
+}
+
+div#leave-room-panel {
+    width: 30rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 3rem;
+    box-shadow: rgba(0, 0, 0, .4) 1rem 1rem;
+    transition: all 0.3s ease;
+    z-index: 12;
+
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &.active {
+        top: 10%;
+    }
+
+    form {
+        display: inline;
     }
 }
 

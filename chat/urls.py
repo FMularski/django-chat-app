@@ -49,4 +49,6 @@ urlpatterns = [
     path('ajax/send_msg/', views.send_message, name='send_msg'),
     path('ajax/fetch_messages/<int:room_pk>/', views.fetch_messages, name='fetch_messages'),
     path('ajax/fetch_rooms/', views.fetch_rooms, name='fetch_rooms'),
+
+    path('leave_room/<int:pk>/', views.leave_room, name='leave_room')
 ]

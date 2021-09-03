@@ -306,7 +306,7 @@ div#dark {
   background: rgba(0, 0, 0, 0.4);
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 12;
   opacity: 0;
   pointer-events: none;
 }
@@ -325,7 +325,7 @@ div#create-room-panel {
           box-shadow: rgba(0, 0, 0, 0.4) 1rem 1rem;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  z-index: 11;
+  z-index: 12;
   position: fixed;
   top: -100%;
   left: 50%;
@@ -369,6 +369,31 @@ div#create-room-panel input[type="submit"] {
   width: 50%;
   display: block;
   margin: auto;
+}
+
+div#leave-room-panel {
+  width: 30rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 3rem;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 1rem 1rem;
+          box-shadow: rgba(0, 0, 0, 0.4) 1rem 1rem;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 12;
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+div#leave-room-panel.active {
+  top: 10%;
+}
+
+div#leave-room-panel form {
+  display: inline;
 }
 
 @-webkit-keyframes spin {
