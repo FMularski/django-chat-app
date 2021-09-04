@@ -36,15 +36,15 @@ urlpatterns = [
     
     path('ajax/search/', views.search, name='search'),
     path('ajax/search/<str:input>/', views.search, name='search'),
-    path('ajax/filter/', views.filter_friends, name='filter_friends'),
-    path('ajax/filter/<str:input>/', views.filter_friends, name='filter_friends'),
+    # path('ajax/filter/', views.filter_friends, name='filter_friends'),
+    # path('ajax/filter/<str:input>/', views.filter_friends, name='filter_friends'),
 
     path('chat_rooms/', views.chat_rooms, name='chat_rooms'),
     path('chat_rooms/<int:pk>/', views.chat_rooms, name='chat_rooms'),
     path('create_room/', views.create_room, name='create_room'),
 
-    path('ajax/filter_rooms/', views.filter_rooms, name='filter_rooms'),
-    path('ajax/filter_rooms/<str:input>/', views.filter_rooms, name='filter_rooms'),
+    # path('ajax/filter_rooms/', views.filter_rooms, name='filter_rooms'),
+    # path('ajax/filter_rooms/<str:input>/', views.filter_rooms, name='filter_rooms'),
 
     path('ajax/send_msg/', views.send_message, name='send_msg'),
     path('ajax/fetch_messages/<int:room_pk>/', views.fetch_messages, name='fetch_messages'),

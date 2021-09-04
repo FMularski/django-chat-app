@@ -164,14 +164,14 @@ def delete_friend(request, pk):
     return HttpResponseNotFound()
 
 
-def filter_friends(request, input=''):
-    if request.is_ajax():
-        filtered_out = list(request.user.profile.friends.filter(~Q(username__istartswith=input)).values('pk'))
+# def filter_friends(request, input=''):
+#     if request.is_ajax():
+#         filtered_out = list(request.user.profile.friends.filter(~Q(username__istartswith=input)).values('pk'))
         
-        filtered_out_ids = [dictionary.get('pk') for dictionary in filtered_out]    
+#         filtered_out_ids = [dictionary.get('pk') for dictionary in filtered_out]    
 
-        return JsonResponse(data={'idsToHide': filtered_out_ids})
-    return HttpResponseNotFound()
+#         return JsonResponse(data={'idsToHide': filtered_out_ids})
+#     return HttpResponseNotFound()
 
 
 @login_required(login_url='login')
@@ -230,14 +230,14 @@ def create_room(request):
     return HttpResponseNotFound()
 
 
-def filter_rooms(request, input=''):
-    if request.is_ajax():
-        filtered_out = list(request.user.profile.room_set.filter(~Q(name__istartswith=input)).values('pk'))
+# def filter_rooms(request, input=''):
+#     if request.is_ajax():
+#         filtered_out = list(request.user.profile.room_set.filter(~Q(name__istartswith=input)).values('pk'))
         
-        filtered_out_ids = [dictionary.get('pk') for dictionary in filtered_out]    
+#         filtered_out_ids = [dictionary.get('pk') for dictionary in filtered_out]    
 
-        return JsonResponse(data={'idsToHide': filtered_out_ids})
-    return HttpResponseNotFound()
+#         return JsonResponse(data={'idsToHide': filtered_out_ids})
+#     return HttpResponseNotFound()
 
 
 def send_message(request):

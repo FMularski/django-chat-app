@@ -29,31 +29,47 @@
 
     filterInput.addEventListener('keyup', function(){
 
-        if (!filterInput.value) {
-            addFriendRecords.forEach(function(record) {
+        if (filterInput.value) {
+            addFriendRecords.forEach(function(record){
+                const username = record.children[1].children[1].innerText;
+                
+                if(!username.startsWith(filterInput.value))
+                    record.classList.add('hidden');
+                else 
+                    record.classList.remove('hidden');
+            })
+        } else {
+            addFriendRecords.forEach(function(record){
                 record.classList.remove('hidden');
-            });
-            filterSpinner.innerHTML = '';
-            return;
+            })
         }
 
-        filterSpinner.innerHTML = '<i class="fas fa-spinner spinning"></i>';
-        $.ajax({
-            url: '/ajax/filter/' + filterInput.value + '/',
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                addFriendRecords.forEach(function(record){
-                    if (response.idsToHide.includes(parseInt(record.getAttribute('id').split('-')[2]))) {
-                        record.classList.add('hidden');
-                    } else {
-                        record.classList.remove('hidden');
-                    }
+        // if (!filterInput.value) {
+        //     addFriendRecords.forEach(function(record) {
+        //         record.classList.remove('hidden');
+        //     });
+        //     filterSpinner.innerHTML = '';
+        //     return;
+        // }
 
-                    filterSpinner.innerHTML = '';
-                })
-            }
-        })
+        // filterSpinner.innerHTML = '<i class="fas fa-spinner spinning"></i>';
+        // $.ajax({
+        //     url: '/ajax/filter/' + filterInput.value + '/',
+        //     method: 'GET',
+        //     dataType: 'json',
+        //     success: function(response) {
+        //         addFriendRecords.forEach(function(record){
+        //             if (response.idsToHide.includes(parseInt(record.getAttribute('id').split('-')[2]))) {
+        //                 record.classList.add('hidden');
+        //             } else {
+        //                 record.classList.remove('hidden');
+        //             }
+
+        //             filterSpinner.innerHTML = '';
+        //         })
+        //     }
+        // })
+
     });
 
     const uncheckBtn = document.querySelector('#uncheck-btn');
