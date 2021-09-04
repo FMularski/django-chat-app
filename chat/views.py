@@ -281,6 +281,7 @@ def fetch_messages(request, room_pk):
         messages = []
         for message in messages_objs:
             messages.append({
+                'pk': message.pk,
                 'createdAt': dateformat.format(message.created_at, 'd.m.Y, H:i'),
                 'text': message.text,
                 'cssClass': 'user-message' if message.sender.pk == request.user.pk else 'friend-message',
@@ -338,5 +339,22 @@ def leave_room(request, pk):
         if not room.members.count():
             room.delete()
         return redirect(reverse('chat_rooms',)) 
+
+    return HttpResponseNotFound()
+
+
+def like_message(request, pk):
+    if request.is_ajax():
+        message = get_object_or_404(models.Message, pk=pk)
+        if f'{request.user.profile.pk}L' in message.liked_by:
+            message.liked_by = str(message.liked_by).replace(f'{request.user.profile.pk}L', '')
+            message.likes -= 1
+        else:
+            message.liked_by += f'{request.user.profile.pk}L'
+            message.likes += 1
+        message.save()
+
+        return JsonResponse(data={'status': 200}, safe=True)
+
 
     return HttpResponseNotFound()

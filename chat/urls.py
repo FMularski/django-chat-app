@@ -50,5 +50,7 @@ urlpatterns = [
     path('ajax/fetch_messages/<int:room_pk>/', views.fetch_messages, name='fetch_messages'),
     path('ajax/fetch_rooms/', views.fetch_rooms, name='fetch_rooms'),
 
-    path('leave_room/<int:pk>/', views.leave_room, name='leave_room')
+    path('leave_room/<int:pk>/', views.leave_room, name='leave_room'),
+
+    path('ajax/like_message/<int:pk>/', views.like_message, name='like_message'),
 ]

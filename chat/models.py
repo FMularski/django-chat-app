@@ -56,6 +56,7 @@ class Message(models.Model):
     likes = models.PositiveSmallIntegerField(default=0)
     sender = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    liked_by = models.CharField(max_length=256, default='')
 
     class Meta:
         ordering = '-created_at',
@@ -85,13 +86,14 @@ def user_profile_post_save_handler(instance, created, **kwargs):
         instance.user.save()
 
 
-@receiver(pre_save, sender=Message)
-def message_pre_save_handler(instance, **kwargs):
+@receiver(post_save, sender=Message)
+def message_post_save_handler(instance, created, **kwargs):
     instance.room.last_message_at = timezone.now()
     instance.room.save()
 
-    members = instance.room.members.all()
-    for member in members:
-        if instance.sender.pk != member.pk:
-            member.rooms_notifications += f'{instance.room.pk}R'
-            member.save()
+    if created:
+        members = instance.room.members.all()
+        for member in members:
+            if instance.sender.pk != member.pk:
+                member.rooms_notifications += f'{instance.room.pk}R'
+                member.save()
