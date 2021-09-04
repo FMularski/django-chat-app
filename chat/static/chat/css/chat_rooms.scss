@@ -34,6 +34,7 @@ div#chat-room-list {
         // background: rgb(212, 212, 212);
         background: rgb(150, 255, 124);
         color: white;
+        z-index: 5;
     }
 
     div#filter-room-spinner {
@@ -64,6 +65,7 @@ div.chat-room-record {
     padding: 1rem;
     border-bottom: 1px solid rgb(212, 212, 212);
     transition: all 0.2s ease;
+    position: relative;
 
     &:hover {
         background: cornflowerblue;
@@ -72,6 +74,17 @@ div.chat-room-record {
 
     &.hidden {
         display: none;
+    }
+
+    span.room-notifications {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        padding: .2rem .6rem .2rem .6rem;
+        border-radius: .5rem;
+        color: white; 
+        background: red;
+        font-weight: bold;
     }
 }
 

@@ -254,6 +254,9 @@ def send_message(request):
         message.room = models.Room.objects.get(pk=request.POST.get('room-pk'))
         message.save()
 
+        request.user.profile.rooms_notifications = str(request.user.profile.rooms_notifications).replace(f'{message.room.pk}R', '')
+        request.user.profile.save()
+
         return JsonResponse(data={
             'pk': message.pk,
             'text': message.text,
@@ -271,6 +274,9 @@ def fetch_messages(request, room_pk):
             .select_related('sender', 'room') \
             .filter(room__pk=room_pk) \
             .order_by('created_at')
+
+        request.user.profile.rooms_notifications = str(request.user.profile.rooms_notifications).replace(f'{room_pk}R', '')
+        request.user.profile.save()
         
         messages = []
         for message in messages_objs:
@@ -307,7 +313,8 @@ def fetch_rooms(request):
                 'lastMsgAt': dateformat.format(last_message.created_at, 'd.m.Y, H:i'),
                 'lastMsgText': last_message.text[:25] + '...',
                 'senderProfileImg': last_message_sender.profile_img.url if last_message.sender.profile_img else '/static/chat/img/default_profile.png',
-                'senderUsername': last_message_sender.username
+                'senderUsername': last_message_sender.username,
+                'notifications': str(request.user.profile.rooms_notifications).count(f'{room.pk}R')
             })
 
         return JsonResponse(data={'rooms': rooms}, safe=False)

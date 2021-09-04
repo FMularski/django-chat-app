@@ -17,18 +17,12 @@
 
                 response.rooms.forEach(function(room) {
 
-                    // let showAfterFilter;
-
-                    // if (!filterInput.value) showAfterFilter = true;
-                    // else showAfterFilter = room.name.startsWith(filterInput.value);
-
-                    // const showAfterFilter = filterInput.value ? room.name.startsWith(filterInput.value) : true;
                     const showAfterFilter = room.name.startsWith(filterInput.value);
 
                     rooms.innerHTML += 
                     '<a href="/chat_rooms/' + room.pk + '" class="chat-room-record-a ' + (showAfterFilter ? '' : 'hidden') + '">' + 
-                    // '<a href="/chat_rooms/' + room.pk + '" class="chat-room-record-a">' + 
                         '<div class="chat-room-record" id="room-record-' + room.pk + '">' + 
+                            (room.notifications ? ('<span id="room-' + room.pk + '-notifications" class="room-notifications">' + room.notifications + '</span>') : '') + 
                             '<p class="chat-room-record-name"><b>' + room.name + 
                             '</b> <span class="chat-room-record-users-count">(' + room.members + ' users)</span></p>' + 
                             '<div class="chat-preview flex-start">' + 

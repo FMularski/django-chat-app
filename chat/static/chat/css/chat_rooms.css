@@ -43,6 +43,7 @@ div#chat-room-list i#add-chat-room-btn {
   border-radius: .5rem;
   background: #96ff7c;
   color: white;
+  z-index: 5;
 }
 
 div#chat-room-list div#filter-room-spinner {
@@ -73,6 +74,7 @@ div.chat-room-record {
   border-bottom: 1px solid #d4d4d4;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 div.chat-room-record:hover {
@@ -82,6 +84,17 @@ div.chat-room-record:hover {
 
 div.chat-room-record.hidden {
   display: none;
+}
+
+div.chat-room-record span.room-notifications {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  padding: .2rem .6rem .2rem .6rem;
+  border-radius: .5rem;
+  color: white;
+  background: red;
+  font-weight: bold;
 }
 
 a#back {
