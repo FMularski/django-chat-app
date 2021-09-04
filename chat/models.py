@@ -19,6 +19,7 @@ class UserProfile(models.Model):
     email = models.EmailField(null=False)
     profile_img = models.ImageField(null=True, blank=True)
     friends = models.ManyToManyField('UserProfile', related_name='profiles_with_this_in_friends', blank=True)
+    rooms_notifications = models.CharField(max_length=1024, default='')
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
@@ -88,3 +89,9 @@ def user_profile_post_save_handler(instance, created, **kwargs):
 def message_pre_save_handler(instance, **kwargs):
     instance.room.last_message_at = timezone.now()
     instance.room.save()
+
+    members = instance.room.members.all()
+    for member in members:
+        if instance.sender.pk != member.pk:
+            member.rooms_notifications += f'{instance.room.pk}R'
+            member.save()

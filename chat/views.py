@@ -13,7 +13,8 @@ from . import models, forms
 @login_required(login_url='login')
 def index(request):
     context = {
-        'invites_count': models.Invitation.objects.filter(send_to=request.user.profile).count()
+        'invites_count': models.Invitation.objects.filter(send_to=request.user.profile).count(),
+        'rooms_notifications': len(str(request.user.profile.rooms_notifications).split(sep='R')) - 1
     }
     return render(request, 'chat/index.html', context)
 
@@ -190,6 +191,11 @@ def chat_rooms(request, pk=None):
 
         if request.user.profile not in members:
             return HttpResponseNotFound()
+
+        # clear room notifications
+        request.user.profile.rooms_notifications = \
+            str(request.user.profile.rooms_notifications).replace(f'{room.pk}R', '')
+        request.user.profile.save()
 
     room_data = {
         'pk': room.pk,

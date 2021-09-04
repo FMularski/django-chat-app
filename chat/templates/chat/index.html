@@ -21,6 +21,9 @@
                 <td>
                     <a href="{% url 'chat_rooms' %}" class="menu-option">
                         <div class="circle">
+                            {% if rooms_notifications %}
+                                <div class="notification-counter">{{rooms_notifications}}</div>
+                            {% endif %}
                             <i class="fas fa-comments"></i>
                         </div>
                     </a>
