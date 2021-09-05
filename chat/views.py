@@ -94,7 +94,8 @@ def search(request, input=''):
             results.append({
                 'pk': result.id, 
                 'username': result.username, 
-                'profile_img': result.profile_img.url if result.profile_img else '/static/chat/img/default_profile.png',
+                'profile_img': result.profile_img.url if result.profile_img \
+                    else 'https://django-chat-app-bucket.s3.eu-central-1.amazonaws.com/chat/img/default_profile.png',
                 'status': status
             })
 
@@ -135,7 +136,7 @@ def accept_invitation(request, pk):
                 'senderId': send_by.pk, 
                 'senderUsername': send_by.username, 
                 'senderProfileImg': send_by.profile_img.url \
-                    if send_by.profile_img else '/static/chat/img/default_profile.png'
+                    if send_by.profile_img else 'https://django-chat-app-bucket.s3.eu-central-1.amazonaws.com/chat/img/default_profile.png'
                 }, 
             safe=False
         )
@@ -261,7 +262,8 @@ def send_message(request):
             'pk': message.pk,
             'text': message.text,
             'senderUsername': message.sender.username,
-            'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img else '/static/chat/img/default_profile.png',
+            'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img \
+                else 'https://django-chat-app-bucket.s3.eu-central-1.amazonaws.com/chat/img/default_profile.png',
             'createdAt': dateformat.format(message.created_at, 'd.m.Y, H:i')
         }, safe=False)
 

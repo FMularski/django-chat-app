@@ -27,11 +27,7 @@
                             '<i>' + response.createdAt + '</i></span>' +
                         '</p><hr>' +
                         '<p class="message-text">' + response.text + '</p>' +
-                        // attached img...
-                        '<div class="message-likes">' + 
-                            '<i class="fas fa-heart"></i> ' + 
-                            '<span class="likes-count">0</span>' + 
-                        '</div>' + 
+                        // attached img... 
                     '</div>'
 
                 $('#messages').animate({ scrollTop: messages.scrollHeight}, 'slow');
