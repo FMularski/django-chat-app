@@ -42,7 +42,7 @@ class RegisterForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = models.UserProfile
-        exclude = 'user', 
+        exclude = 'user', 'rooms_notifications' 
 
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),

@@ -17,9 +17,9 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=150, null=False)
     last_name = models.CharField(max_length=150, null=False)
     email = models.EmailField(null=False)
-    profile_img = models.ImageField(null=True, blank=True)
+    profile_img = models.ImageField(null=True, blank=True, upload_to='uploads')
     friends = models.ManyToManyField('UserProfile', related_name='profiles_with_this_in_friends', blank=True)
-    rooms_notifications = models.CharField(max_length=1024, default='')
+    rooms_notifications = models.CharField(max_length=1024, default='', blank=True)
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
