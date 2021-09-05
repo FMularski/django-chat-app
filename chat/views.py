@@ -289,7 +289,8 @@ def fetch_messages(request, room_pk):
                 'likes': message.likes,
                 'senderUsername': message.sender.username,
                 'senderPK': message.sender.pk,
-                'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img else '/static/chat/img/default_profile.png',
+                'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img \
+                    else 'https://django-chat-app-bucket.s3.eu-central-1.amazonaws.com/chat/img/default_profile.png',
                 'likedBy': message.liked_by
             })
 
@@ -314,7 +315,8 @@ def fetch_rooms(request):
                 'members': room.members.count(),
                 'lastMsgAt': dateformat.format(last_message.created_at, 'd.m.Y, H:i'),
                 'lastMsgText': last_message.text[:25] + '...',
-                'senderProfileImg': last_message_sender.profile_img.url if last_message.sender.profile_img else '/static/chat/img/default_profile.png',
+                'senderProfileImg': last_message_sender.profile_img.url if last_message.sender.profile_img \
+                    else 'https://django-chat-app-bucket.s3.eu-central-1.amazonaws.com/chat/img/default_profile.png',
                 'senderUsername': last_message_sender.username,
                 'notifications': str(request.user.profile.rooms_notifications).count(f'{room.pk}R')
             })
