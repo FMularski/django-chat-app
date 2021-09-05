@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <a href="{% url 'chat_rooms' %}" class="menu-option">
-                        <div class="circle">
+                        <div class="circle circle-expand">
                             {% if rooms_notifications %}
                                 <div class="notification-counter">{{rooms_notifications}}</div>
                             {% endif %}
@@ -31,7 +31,7 @@
                 <td></td>
                 <td>
                     <a href="{% url 'friends' %}" class="menu-option">
-                        <div class="circle">
+                        <div class="circle circle-expand">
                             {% if invites_count %}
                                 <div class="notification-counter">{{invites_count}}</div>
                             {% endif %}
@@ -42,7 +42,7 @@
                 <td></td>
                 <td>
                     <a href="{% url 'edit' %}" class="menu-option">
-                        <div class="circle">
+                        <div class="circle circle-expand">
                             <i class="fas fa-user-edit"></i>
                         </div>
                     </a>
@@ -51,15 +51,15 @@
             <tr>
                 <td></td>
                 <td>
-                    <a href="#" class="menu-option">
+                    <a href="https://github.com/FMularski/django-chat-app" target="_blank" class="menu-option">
                         <div class="circle">
-                            <i class="fab fa-apple-pay"></i>
+                            <i class="fab fa-github"></i>
                         </div>
                     </a>
                 </td>
                 <td></td>
                 <td><a href="{% url 'logout' %}" class="menu-option">
-                    <div class="circle">
+                    <div class="circle circle-expand">
                         <i class="fas fa-door-open"></i>
                     </div>
                 </a></td>
@@ -75,7 +75,7 @@
 {% block script %}
     <script>
         (function() {
-            const menuOptions = document.querySelectorAll('.circle');
+            const menuOptions = document.querySelectorAll('.circle-expand');
             menuOptions.forEach(function(opt) {
                 opt.addEventListener('click', function (){
                     opt.innerText = '';

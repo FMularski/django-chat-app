@@ -3,7 +3,13 @@
 {% block link %}
     <link rel="stylesheet" href="{% static '/chat/css/chat_rooms.css' %} ">
 {% endblock %}
-{% block title %} | Chat Rooms {% endblock %}
+{% block title %}
+    {% if room_data %}
+        | {{room_data.name}}
+    {% else %}
+        | Chat Rooms 
+    {% endif %}
+ {% endblock %}
 {% block main %}
     <main class="flex-start">
         <div id="chat-room-list-and-filter">
@@ -34,8 +40,8 @@
                 <div id="message-input-panel" class="flex-evenly hidden">
                     <span id="new-msg-btn" class="hidden">New Message <i class="fas fa-arrow-circle-down"></i></span>
                     {% csrf_token %}
-                    <input id="msg-img" name="msg-file" type="file">
-                    <textarea name="msg-text" id="msg-text" cols="100" rows="2" class="form-control w-75"></textarea>
+                    <!-- <input id="msg-img" name="msg-file" type="file"> -->
+                    <textarea name="msg-text" id="msg-text" cols="100" rows="2" class="form-control w-100"></textarea>
                     <button id="send-btn" class="hover-scale btn btn-dark"><i class="fas fa-paper-plane"></i></button>
                 </div>
             {% else %}
