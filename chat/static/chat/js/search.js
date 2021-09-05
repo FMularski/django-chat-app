@@ -53,7 +53,7 @@
                         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
                         const flyingMsg = document.createElement('img');
-                        flyingMsg.setAttribute('src', '/static/chat/img/message.png');
+                        flyingMsg.setAttribute('src', 'https://django-chat-app-bucket.s3.eu-central-1.amazonaws.com/chat/img/message.png');
                         flyingMsg.setAttribute('class', 'flying-invitation');
                         flyingMsg.addEventListener('animationend', function() {
                             this.remove();
