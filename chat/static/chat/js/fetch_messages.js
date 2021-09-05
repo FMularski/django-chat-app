@@ -25,7 +25,7 @@
 
                 response.messages.forEach(function(message) {
                     messagesBox.innerHTML += 
-                    '<div class="message hover-scale ' + message.cssClass + '" id="message-' + message.pk + '">' + 
+                    '<div class="message hover-scale ' + message.cssClass + '" id="message-' + message.pk + '" liked-by="' + message.likedBy + '">' + 
                         '<p>' + 
                             '<img src="' + message.senderProfileImg + '" class="user-portrait">' + 
                             '<span class="chat-room-record-username"><b>' + message.senderUsername + '</b> ' + 
@@ -57,7 +57,7 @@
                     msg.addEventListener('click', function(){
                         const id = msg.getAttribute('id').split('-')[1];
                         const likes = document.querySelector('#message-' + id + '-likes');
-
+                        
                         if(!likes) {
                             msg.innerHTML += 
                             '<div class="message-likes" id="message-' + id + '-likes">' + 
@@ -65,12 +65,22 @@
                                 ' <span class="likes-count">1</span>' + 
                             '</div>';
                         } 
-                        // else {
-                        //     const likesCount = parseInt(likes.children[1].innerText);
+                        else {
+                            const likesCount = parseInt(likes.children[1].innerText);
+                            const likedBy = msg.getAttribute('liked-by');
+                            const userPK = messages.getAttribute('my-pk');
+
+                            if (likedBy.includes(userPK)) {
+                                if(likesCount > 1) likes.children[1].innerText = parseInt(likes.children[1].innerText) - 1;
+                                else likes.remove();
+
+                                msg.setAttribute('liked-by', msg.getAttribute('liked-by').replace(userPK + 'L', ''));
+                            } else {
+                                likes.children[1].innerText = parseInt(likes.children[1].innerText) + 1;
+                                msg.setAttribute('liked-by', msg.getAttribute('liked-by') + userPK + 'L');
+                            }
                             
-                        //     if(likesCount > 1) likes.children[1].innerText = parseInt(likes.children[1].innerText) - 1;
-                        //     else likes.remove();
-                        // }
+                        }
 
                         $.ajax({
                             url: '/ajax/like_message/' + id + '/',

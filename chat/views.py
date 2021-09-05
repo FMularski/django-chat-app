@@ -289,7 +289,8 @@ def fetch_messages(request, room_pk):
                 'likes': message.likes,
                 'senderUsername': message.sender.username,
                 'senderPK': message.sender.pk,
-                'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img else '/static/chat/img/default_profile.png'
+                'senderProfileImg': message.sender.profile_img.url if message.sender.profile_img else '/static/chat/img/default_profile.png',
+                'likedBy': message.liked_by
             })
 
         return JsonResponse(data={'messages': messages}, safe=False)
