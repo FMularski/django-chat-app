@@ -47,12 +47,12 @@
 
 ![chat (2)](https://user-images.githubusercontent.com/26598200/132264456-e2482d39-4121-49cb-b351-9b4ac0ed612f.gif)
 
-## Download 
+## ✉️ Download 
 ```bash
 git clone https://github.com/FMularski/django-chat-app.git
 ```
 
-## Or experience it LIVE
+## ✉️ Or experience it LIVE
 [Chat App on Heroku](https://ch4t-4pp.herokuapp.com/)
 
 
